@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Chapters You Never Knew You Wrote</title>
+    <title>The Memories You Gave the World</title>
 
     <!-- Favicon Icon (Luminous Crescent Moon symbolizing memories & quiet importance) -->
     <link rel="icon" type="image/svg+xml"
@@ -322,7 +322,7 @@
         }
 
         .welcome-header-badge::before {
-            content: '🌙';
+            content: '';
             font-size: 0.85rem;
         }
 
@@ -431,9 +431,11 @@
             background: transparent;
             border: none;
             box-shadow: none;
-            transition: opacity 0.6s var(--ease-smooth), transform 0.6s var(--ease-smooth), filter 0.6s var(--ease-smooth);
+            transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: opacity, transform, filter;
-            filter: blur(4px);
+            filter: blur(6px);
         }
 
         /* Custom Swipe Physics & Dynamic Animations */
@@ -443,14 +445,14 @@
 
         .slide.exit-left {
             opacity: 0;
-            transform: translate3d(-80%, 0, 0) scale(0.95);
-            filter: blur(6px);
+            transform: translate3d(-35px, 0, 0) scale(0.97);
+            filter: blur(8px);
         }
 
         .slide.exit-right {
             opacity: 0;
-            transform: translate3d(80%, 0, 0) scale(0.95);
-            filter: blur(6px);
+            transform: translate3d(35px, 0, 0) scale(0.97);
+            filter: blur(8px);
         }
 
         .slide.active {
@@ -462,14 +464,14 @@
 
         .slide.enter-right {
             opacity: 0;
-            transform: translate3d(80%, 0, 0) scale(0.95);
-            filter: blur(6px);
+            transform: translate3d(35px, 0, 0) scale(0.97);
+            filter: blur(8px);
         }
 
         .slide.enter-left {
             opacity: 0;
-            transform: translate3d(-80%, 0, 0) scale(0.95);
-            filter: blur(6px);
+            transform: translate3d(-35px, 0, 0) scale(0.97);
+            filter: blur(8px);
         }
 
         .slide::-webkit-scrollbar {
@@ -610,6 +612,1062 @@
             text-align: justify;
         }
 
+        /* Animated Living SVG Rose Component & Growth Stages */
+        .living-animated-rose {
+            width: 32px;
+            height: 32px;
+            overflow: visible;
+        }
+
+        .rose-stem-line {
+            stroke-dasharray: 50;
+            stroke-dashoffset: 50;
+            transition: stroke-dashoffset 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .rose-leaf-group {
+            opacity: 0;
+            transform-origin: 50px 65px;
+            transform: scale(0) rotate(-15deg);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .rose-bud-group {
+            opacity: 0;
+            transform-origin: 50px 42px;
+            transform: scale(0);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .rose-bloom-group {
+            opacity: 0;
+            transform-origin: 50px 30px;
+            transform: scale(0);
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .rose-bouquet-group {
+            opacity: 0;
+            transform-origin: 50px 30px;
+            transform: scale(0);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Stage 1: 🌱 A Beginning (Seedling Sprout) */
+        .rose-stage-1 .rose-stem-line {
+            stroke-dashoffset: 38;
+        }
+
+        .rose-stage-1 .rose-bud-group {
+            opacity: 1;
+            transform: scale(0.5);
+        }
+
+        /* Stage 2: 🌿 Growing (Stem Grows & Left Leaf Appears) */
+        .rose-stage-2 .rose-stem-line {
+            stroke-dashoffset: 24;
+        }
+
+        .rose-stage-2 .left-leaf {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+        }
+
+        .rose-stage-2 .rose-bud-group {
+            opacity: 1;
+            transform: scale(0.7);
+        }
+
+        /* Stage 3: 🌿✨ Becoming (Right Leaf Appears) */
+        .rose-stage-3 .rose-stem-line {
+            stroke-dashoffset: 0;
+        }
+
+        .rose-stage-3 .left-leaf {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+        }
+
+        .rose-stage-3 .right-leaf {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+        }
+
+        .rose-stage-3 .rose-bud-group {
+            opacity: 1;
+            transform: scale(0.9);
+        }
+
+        /* Stage 4: 🌷 Blooming (Bud Opens) */
+        .rose-stage-4 .rose-stem-line {
+            stroke-dashoffset: 0;
+        }
+
+        .rose-stage-4 .left-leaf {
+            opacity: 1;
+            transform: scale(1.1) rotate(0deg);
+        }
+
+        .rose-stage-4 .right-leaf {
+            opacity: 1;
+            transform: scale(1.1) rotate(0deg);
+        }
+
+        .rose-stage-4 .rose-bud-group {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        .rose-stage-4 .rose-bloom-group {
+            opacity: 0.6;
+            transform: scale(0.7);
+        }
+
+        /* Stage 5: 🌹 Meaning (Full Blooming Rose) */
+        .rose-stage-5 .rose-stem-line {
+            stroke-dashoffset: 0;
+        }
+
+        .rose-stage-5 .left-leaf {
+            opacity: 1;
+            transform: scale(1.1) rotate(0deg);
+        }
+
+        .rose-stage-5 .right-leaf {
+            opacity: 1;
+            transform: scale(1.1) rotate(0deg);
+        }
+
+        .rose-stage-5 .rose-bud-group {
+            opacity: 0.3;
+            transform: scale(0.5);
+        }
+
+        .rose-stage-5 .rose-bloom-group {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Stage 6: 🌹✨ Cherished (Radiant Blooming Rose) */
+        .rose-stage-6 .rose-stem-line {
+            stroke-dashoffset: 0;
+        }
+
+        .rose-stage-6 .left-leaf {
+            opacity: 1;
+            transform: scale(1.2) rotate(0deg);
+        }
+
+        .rose-stage-6 .right-leaf {
+            opacity: 1;
+            transform: scale(1.2) rotate(0deg);
+        }
+
+        .rose-stage-6 .rose-bloom-group {
+            opacity: 1;
+            transform: scale(1.2);
+            filter: drop-shadow(0 0 10px rgba(255, 77, 136, 0.8));
+        }
+
+        /* Stage 7: 💐 A Beautiful Story (Full Size Golden Bouquet - No Stem) */
+        .rose-stage-7 .rose-soil,
+        .rose-stage-7 .rose-sprout-dot,
+        .rose-stage-7 .rose-stem-line,
+        .rose-stage-7 .left-leaf,
+        .rose-stage-7 .right-leaf,
+        .rose-stage-7 .rose-bud-group,
+        .rose-stage-7 .rose-bloom-group {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            display: none !important;
+        }
+
+        .rose-stage-7 .rose-bouquet-group {
+            opacity: 1;
+            transform-origin: 50px 50px;
+            transform: scale(1);
+            animation: bouquet-pulse 3.5s ease-in-out infinite;
+        }
+
+        @keyframes bouquet-pulse {
+            0%, 100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.8));
+            }
+            50% {
+                transform: scale(1.08);
+                filter: drop-shadow(0 0 22px rgba(255, 133, 161, 0.95));
+            }
+        }
+
+        /* Traveling Stardust Particles */
+        .rose-traveling-stardust {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #ffffff 0%, var(--accent-pink-cream) 40%, var(--accent-pink-primary) 100%);
+            box-shadow: 0 0 10px var(--accent-pink-primary), 0 0 20px #fff;
+            pointer-events: none;
+            z-index: 11000;
+            opacity: 1;
+            transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.75s ease;
+        }
+
+        /* Cinematic Prelude Overlay & Stardust Constellation */
+        .prelude-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 12000;
+            background: #01050c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                visibility 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            user-select: none;
+        }
+
+        .prelude-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(1.05);
+            pointer-events: none;
+        }
+
+        #prelude-stars-canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .prelude-skip-chip {
+            position: absolute;
+            top: 24px;
+            left: 24px;
+            z-index: 10;
+            padding: 6px 16px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 133, 161, 0.35);
+            color: var(--accent-pink-cream);
+            font-size: 0.78rem;
+            font-family: var(--font-body);
+            letter-spacing: 1px;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .prelude-skip-chip:hover {
+            background: rgba(255, 77, 136, 0.3);
+            border-color: var(--accent-pink-primary);
+            transform: scale(1.05);
+        }
+
+        /* Front Page Luminous Crescent Moon */
+        .prelude-moon-wrapper {
+            position: absolute;
+            top: 40px;
+            right: 50px;
+            width: 76px;
+            height: 76px;
+            pointer-events: none;
+            z-index: 3;
+            opacity: 0.92;
+            filter: drop-shadow(0 0 20px rgba(255, 235, 175, 0.7)) drop-shadow(0 0 40px rgba(255, 77, 136, 0.4));
+            animation: prelude-moon-float 5s ease-in-out infinite;
+        }
+
+        @media (max-width: 600px) {
+            .prelude-moon-wrapper {
+                top: 25px;
+                right: 25px;
+                width: 54px;
+                height: 54px;
+            }
+        }
+
+        .prelude-crescent-moon {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, #fffef0 0%, #ffeaa7 45%, #f7d6e1 75%, #e84393 100%);
+            box-shadow: inset -8px -8px 18px rgba(0, 0, 0, 0.35), 0 0 35px rgba(255, 225, 180, 0.85);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .prelude-moon-crater {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(180, 100, 130, 0.2);
+            box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .prelude-moon-crater.crater-1 {
+            width: 14px;
+            height: 14px;
+            top: 22%;
+            left: 28%;
+        }
+
+        .prelude-moon-crater.crater-2 {
+            width: 10px;
+            height: 10px;
+            top: 55%;
+            left: 45%;
+        }
+
+        .prelude-moon-crater.crater-3 {
+            width: 8px;
+            height: 8px;
+            top: 38%;
+            left: 65%;
+        }
+
+        .prelude-moon-aura {
+            position: absolute;
+            inset: -22px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 230, 180, 0.28) 0%, rgba(255, 133, 161, 0.12) 50%, transparent 72%);
+            animation: prelude-moon-aura-pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes prelude-moon-float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-7px) rotate(-3deg);
+            }
+        }
+
+        @keyframes prelude-moon-aura-pulse {
+            0%, 100% {
+                opacity: 0.65;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.15);
+            }
+        }
+
+        .prelude-content {
+            position: relative;
+            z-index: 5;
+            text-align: center;
+            max-width: 680px;
+            width: 90%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 280px;
+        }
+
+        .prelude-quote-line {
+            font-family: var(--font-title);
+            font-size: clamp(1.4rem, 3.8vw, 2.3rem);
+            color: var(--text-pure);
+            text-shadow: 0 0 20px rgba(255, 182, 193, 0.7), 0 0 40px rgba(255, 77, 136, 0.4);
+            line-height: 1.5;
+            margin: 0;
+            opacity: 0;
+            transform: translateY(18px) scale(0.96);
+            filter: blur(8px);
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            position: absolute;
+            width: 100%;
+        }
+
+        .prelude-quote-line.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0px);
+        }
+
+        .prelude-quote-line.exit {
+            opacity: 0;
+            transform: translateY(-18px) scale(1.04);
+            filter: blur(8px);
+        }
+
+        .prelude-welcome-container {
+            opacity: 0;
+            transform: scale(0.92);
+            filter: blur(10px);
+            transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+
+        .prelude-welcome-container.active {
+            opacity: 1;
+            transform: scale(1);
+            filter: blur(0px);
+            pointer-events: auto;
+        }
+
+        .prelude-rose-emblem {
+            font-size: clamp(2.4rem, 6vw, 3.6rem);
+            margin-bottom: 10px;
+            filter: drop-shadow(0 0 18px rgba(255, 77, 136, 0.9));
+            animation: prelude-rose-glow 2.5s infinite ease-in-out;
+        }
+
+        @keyframes prelude-rose-glow {
+
+            0%,
+            100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 15px rgba(255, 77, 136, 0.7));
+            }
+
+            50% {
+                transform: scale(1.08);
+                filter: drop-shadow(0 0 30px rgba(255, 77, 136, 1));
+            }
+        }
+
+        .prelude-welcome-title {
+            font-family: var(--font-title);
+            font-size: clamp(2.2rem, 6vw, 3.8rem);
+            background: linear-gradient(135deg, #ffffff 20%, var(--accent-pink-cream) 55%, var(--accent-rose-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 35px rgba(255, 77, 136, 0.8);
+            margin: 0 0 12px 0;
+            letter-spacing: 1px;
+        }
+
+        .prelude-welcome-sub {
+            font-family: var(--font-body);
+            font-size: clamp(0.88rem, 1.8vw, 1.05rem);
+            color: var(--accent-rose-gold);
+            position: relative;
+            top: 50px;
+            margin-bottom: 28px;
+            font-style: italic;
+            text-shadow: 0 0 12px rgba(255, 133, 161, 0.5);
+        }
+
+        .prelude-enter-btn {
+            background: linear-gradient(135deg, var(--accent-pink-primary) 0%, var(--accent-rose-gold) 100%);
+            color: #fff;
+            padding: 14px 38px;
+            border-radius: 30px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            box-shadow: 0 0 25px rgba(255, 77, 136, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.4s ease;
+            animation: prelude-pulse 2s infinite ease-in-out;
+            margin-top: 48px;
+        }
+
+        .prelude-enter-btn:hover {
+            transform: scale(1.06);
+            box-shadow: 0 0 35px rgba(255, 77, 136, 0.9), inset 0 0 15px rgba(255, 255, 255, 0.6);
+        }
+
+        /* Chapter Transition Story Interstitial Overlay */
+        .ch-transition-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 10500;
+            background: rgba(4, 1, 8, 0.95);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                visibility 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+            user-select: none;
+            will-change: opacity;
+        }
+
+        .ch-transition-overlay.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .ch-transition-content {
+            text-align: center;
+            max-width: 580px;
+            width: 88%;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ch-transition-quote {
+            font-family: var(--font-title);
+            font-size: clamp(1.28rem, 3.5vw, 1.95rem);
+            color: var(--accent-pink-cream);
+            text-shadow: 0 0 25px rgba(255, 77, 136, 0.75), 0 0 50px rgba(255, 182, 193, 0.45);
+            line-height: 1.6;
+            margin: 0 0 16px 0;
+            opacity: 0;
+            transform: translateY(18px) scale(0.97);
+            filter: blur(6px);
+            transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform, filter;
+        }
+
+        .ch-transition-overlay.active .ch-transition-quote {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0px);
+        }
+
+        .ch-transition-sparkle {
+            font-size: 1.6rem;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: opacity 0.65s ease 0.2s, transform 0.65s ease 0.2s;
+            filter: drop-shadow(0 0 12px var(--accent-pink-primary));
+        }
+
+        .ch-transition-overlay.active .ch-transition-sparkle {
+            opacity: 1;
+            transform: scale(1);
+            animation: sparkle-float 2s infinite ease-in-out;
+        }
+
+        /* Grand Finale Cinematic Overhaul */
+        .finale-cinematic-layer {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            transition: opacity 0.8s ease;
+        }
+
+        #finale-stars-constellation-canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .finale-center-rose-box {
+            position: relative;
+            z-index: 3;
+            width: 90px;
+            height: 90px;
+            margin-bottom: 24px;
+            opacity: 0;
+            transform: scale(0.4);
+            filter: blur(10px);
+            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .finale-center-rose-box.active {
+            opacity: 1;
+            transform: scale(1.4);
+            filter: blur(0px);
+            animation: center-rose-glow 3s infinite ease-in-out;
+        }
+
+        @keyframes center-rose-glow {
+
+            0%,
+            100% {
+                transform: scale(1.4);
+                filter: drop-shadow(0 0 18px rgba(255, 77, 136, 0.7));
+            }
+
+            50% {
+                transform: scale(1.52);
+                filter: drop-shadow(0 0 35px rgba(255, 77, 136, 1));
+            }
+        }
+
+        .finale-cinematic-quotes {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .finale-quote-item {
+            position: absolute;
+            font-family: var(--font-title);
+            font-size: clamp(1.3rem, 3.5vw, 2.1rem);
+            color: var(--accent-pink-cream);
+            text-shadow: 0 0 25px rgba(255, 77, 136, 0.8), 0 0 50px rgba(255, 182, 193, 0.5);
+            line-height: 1.5;
+            opacity: 0;
+            transform: translateY(16px) scale(0.96);
+            filter: blur(8px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+        }
+
+        .finale-quote-item.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0px);
+        }
+
+        .finale-quote-item.exit {
+            opacity: 0;
+            transform: translateY(-16px) scale(1.04);
+            filter: blur(8px);
+        }
+
+        /* Finale Content Box Initial State (Hidden until Cinematic completes) */
+        .finale-content-box {
+            position: relative;
+            z-index: 4;
+            opacity: 0;
+            transform: translateY(30px) scale(0.96);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+        }
+
+        .finale-content-box.cinematic-done {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
+
+        .finale-moon-wrapper,
+        .clouds-layer {
+            transition: opacity 1s ease;
+        }
+
+        /* Secret Header Moon Icon & Easter Egg Modal */
+        .secret-moon-btn {
+            display: inline-block;
+            cursor: pointer;
+            margin-right: 4px;
+            font-size: 0.82rem;
+            filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.7));
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .secret-moon-btn:hover {
+            transform: scale(1.35) rotate(-15deg);
+            filter: drop-shadow(0 0 12px rgba(255, 215, 0, 1));
+        }
+
+        .secret-modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 12000;
+            background: rgba(8, 2, 12, 0.88);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+            padding: 20px;
+        }
+
+        .secret-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .secret-modal-card {
+            background: linear-gradient(135deg, rgba(50, 15, 30, 0.97) 0%, rgba(28, 7, 18, 0.98) 100%);
+            border: 1px solid rgba(255, 150, 180, 0.35);
+            box-shadow: 0 0 50px rgba(220, 50, 110, 0.35), inset 0 0 25px rgba(255, 200, 220, 0.05);
+            border-radius: 24px;
+            max-width: 520px;
+            width: 100%;
+            padding: 36px 30px 28px;
+            text-align: left;
+            position: relative;
+            transform: scale(0.9) translateY(15px);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            color: #fae3eb;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .secret-modal-overlay.active .secret-modal-card {
+            transform: scale(1) translateY(0);
+        }
+
+        .secret-modal-close-icon {
+            position: absolute;
+            top: 16px;
+            right: 18px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--text-light, #fff);
+            font-size: 1.4rem;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .secret-modal-close-icon:hover {
+            background: rgba(255, 77, 136, 0.3);
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        .secret-modal-body {
+            margin-bottom: 24px;
+            line-height: 1.7;
+            font-family: var(--font-body);
+        }
+
+        .secret-letter-salutation {
+            font-family: var(--font-title);
+            font-size: clamp(1.2rem, 2.5vw, 1.45rem);
+            color: #ffe6ee;
+            margin-bottom: 18px;
+            font-weight: 600;
+        }
+
+        .secret-letter-paragraph {
+            font-size: clamp(0.92rem, 1.8vw, 1.02rem);
+            color: #f7d6e1;
+            margin-bottom: 18px;
+            line-height: 1.75;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .secret-letter-valediction {
+            font-size: clamp(0.95rem, 1.9vw, 1.05rem);
+            color: #ffcae0;
+            font-weight: 500;
+            margin-top: 24px;
+            margin-bottom: 0;
+            text-shadow: 0 1px 6px rgba(255, 77, 136, 0.4);
+        }
+
+        .secret-modal-footer {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .secret-modal-close-btn {
+            background: linear-gradient(135deg, var(--accent-pink-primary) 0%, var(--accent-rose-gold) 100%);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 10px 28px;
+            border-radius: 24px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 77, 136, 0.5);
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .secret-modal-close-btn:hover {
+            transform: scale(1.06);
+            box-shadow: 0 0 30px rgba(255, 77, 136, 0.8);
+        }
+
+        @keyframes sparkle-float {
+
+            0%,
+            100% {
+                transform: translateY(0) scale(1);
+            }
+
+            50% {
+                transform: translateY(-5px) scale(1.15);
+            }
+        }
+
+        @keyframes prelude-pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 25px rgba(255, 77, 136, 0.6);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(255, 77, 136, 0.95), 0 0 15px #fff;
+            }
+        }
+
+        /* Chapter 2 Magical Traveling Glowing Line Timeline */
+        .ch2-timeline-container {
+            position: relative;
+            max-width: 820px;
+            margin: 24px auto 0;
+            padding-left: 36px;
+        }
+
+        .ch2-timeline-track {
+            position: absolute;
+            top: 20px;
+            bottom: 30px;
+            left: 14px;
+            width: 3px;
+            background: rgba(255, 133, 161, 0.18);
+            border-radius: 3px;
+            overflow: visible;
+        }
+
+        .ch2-glowing-line-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0%;
+            background: linear-gradient(180deg, var(--accent-pink-primary) 0%, var(--accent-rose-gold) 50%, var(--accent-pink-cream) 100%);
+            box-shadow: 0 0 12px var(--accent-pink-primary), 0 0 25px rgba(255, 77, 136, 0.6);
+            border-radius: 3px;
+            transition: height 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .ch2-glowing-star-head {
+            position: absolute;
+            bottom: -7px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 14px;
+            height: 14px;
+            background: #ffffff;
+            border-radius: 50%;
+            box-shadow: 0 0 15px #ffffff, 0 0 30px var(--accent-pink-primary), 0 0 45px var(--accent-rose-gold);
+            animation: head-star-pulse 1.5s infinite ease-in-out;
+        }
+
+        @keyframes head-star-pulse {
+
+            0%,
+            100% {
+                transform: translateX(-50%) scale(1);
+                filter: drop-shadow(0 0 8px #fff);
+            }
+
+            50% {
+                transform: translateX(-50%) scale(1.3);
+                filter: drop-shadow(0 0 16px var(--accent-pink-primary));
+            }
+        }
+
+        .ch2-stage-item {
+            position: relative;
+            margin-bottom: 32px;
+            opacity: 0.35;
+            transform: translateY(22px);
+            filter: blur(4px);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .ch2-stage-item.stage-active {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0px);
+        }
+
+        .ch2-stage-node {
+            position: absolute;
+            left: -36px;
+            top: 24px;
+            transform: translate(-50%, -50%);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(30, 8, 24, 0.9);
+            border: 2px solid rgba(255, 133, 161, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.95rem;
+            z-index: 4;
+            transition: all 0.5s ease;
+            cursor: pointer;
+        }
+
+        .ch2-stage-item.stage-active .ch2-stage-node {
+            border-color: var(--accent-pink-cream);
+            background: rgba(255, 77, 136, 0.35);
+            box-shadow: 0 0 20px rgba(255, 77, 136, 0.7), inset 0 0 10px rgba(255, 255, 255, 0.5);
+            transform: translate(-50%, -50%) scale(1.15);
+        }
+
+        .ch2-stage-card {
+            background: rgba(35, 10, 26, 0.72);
+            border: 1px solid rgba(255, 133, 161, 0.28);
+            border-radius: 20px;
+            padding: 22px 24px;
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s ease;
+            text-align: left;
+        }
+
+        .ch2-stage-card h3 {
+            font-family: var(--font-body);
+            font-size: clamp(0.98rem, 1.5vw, 1.08rem);
+            font-weight: 600;
+            color: var(--accent-pink-cream);
+            margin-bottom: 6px;
+        }
+
+        .ch2-stage-card p {
+            font-size: clamp(0.82rem, 1.2vw, 0.88rem);
+            margin-bottom: 0;
+            line-height: 1.6;
+            color: var(--text-muted);
+            text-align: justify;
+        }
+
+        .ch2-stage-item.stage-active .ch2-stage-card {
+            border-color: rgba(255, 133, 161, 0.55);
+            box-shadow: 0 12px 35px rgba(255, 77, 136, 0.35);
+        }
+
+        /* Chapter 3 Magical Blur & Unblur Card Reveals */
+        #ch3-cards-grid .card {
+            transition: opacity 0.6s var(--ease-smooth),
+                transform 0.6s var(--ease-smooth),
+                filter 0.6s var(--ease-smooth),
+                box-shadow 0.4s ease,
+                border-color 0.4s ease;
+            position: relative;
+        }
+
+        #ch3-cards-grid .card.blurred-card {
+            filter: blur(9px) saturate(0.5);
+            opacity: 0.4;
+            transform: scale(0.95);
+            cursor: pointer;
+            border-color: rgba(255, 133, 161, 0.25);
+            background: rgba(18, 4, 14, 0.55);
+        }
+
+        #ch3-cards-grid .card.blurred-card:hover {
+            opacity: 0.7;
+            filter: blur(5px) saturate(0.8);
+            transform: scale(0.98);
+            border-color: rgba(255, 133, 161, 0.5);
+            box-shadow: 0 0 20px rgba(255, 77, 136, 0.35);
+        }
+
+        .card-reveal-hint {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(30, 8, 24, 0.92);
+            border: 1px solid var(--accent-pink-primary);
+            color: var(--accent-pink-cream);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.76rem;
+            font-family: var(--font-body);
+            font-weight: 500;
+            white-space: nowrap;
+            box-shadow: 0 0 15px rgba(255, 20, 147, 0.55);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            pointer-events: none;
+            z-index: 5;
+            transition: opacity 0.35s ease, transform 0.35s ease;
+            animation: hint-pulse-pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes hint-pulse-pulse {
+
+            0%,
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                box-shadow: 0 0 15px rgba(255, 20, 147, 0.55);
+            }
+
+            50% {
+                transform: translate(-50%, -50%) scale(1.06);
+                box-shadow: 0 0 25px rgba(255, 20, 147, 0.8);
+            }
+        }
+
+        #ch3-cards-grid .card.revealed-card {
+            filter: blur(0px) saturate(1);
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        #ch3-cards-grid .card.revealed-card.unblur-anim {
+            animation: card-unblur-pop 0.6s var(--ease-smooth);
+        }
+
+        @keyframes card-unblur-pop {
+            0% {
+                transform: scale(0.95);
+                filter: blur(6px);
+            }
+
+            50% {
+                transform: scale(1.03);
+                filter: blur(0px);
+                box-shadow: 0 0 30px rgba(255, 77, 136, 0.65);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
         .expressive-list {
             text-align: center;
             line-height: 2;
@@ -629,7 +1687,7 @@
             padding: 13px 36px;
             border-radius: 30px;
             font-family: var(--font-body);
-            font-size: clamp(0.78rem, 1.2vw, 0.85rem);
+            font-size: clamp(0.68rem, 1.2vw, 0.85rem);
             letter-spacing: 1.2px;
             text-transform: uppercase;
             font-weight: 600;
@@ -1185,11 +2243,21 @@
         }
 
         .rose-bloom-display {
-            font-size: 3.5rem;
+            font-size: 3.8rem;
             line-height: 1;
-            margin-bottom: 12px;
-            filter: drop-shadow(0 0 16px rgba(255, 77, 136, 0.6));
+            margin: 0 auto 14px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 85px;
+            filter: drop-shadow(0 0 20px rgba(255, 77, 136, 0.85));
             animation: floating-bloom 3s infinite ease-in-out;
+        }
+
+        .rose-bloom-display .living-animated-rose {
+            width: 84px;
+            height: 84px;
+            overflow: visible;
         }
 
         @keyframes floating-bloom {
@@ -1224,31 +2292,48 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            background: rgba(0, 0, 0, 0.25);
-            padding: 10px 16px;
-            border-radius: 30px;
-            border: 1px solid rgba(255, 133, 161, 0.2);
+            flex-wrap: wrap;
+            gap: clamp(4px, 1.6vw, 8px);
+            background: rgba(0, 0, 0, 0.35);
+            padding: 10px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 133, 161, 0.25);
             margin-bottom: 22px;
+            box-sizing: border-box;
+            max-width: 100%;
+            overflow: hidden;
         }
 
         .growth-step {
-            font-size: 1.3rem;
-            opacity: 0.4;
-            transition: all 0.4s ease;
-            filter: grayscale(0.7);
+            font-size: clamp(1.0rem, 3.2vw, 1.2rem);
+            opacity: 0.55;
+            transition: all 0.3s ease;
+            filter: grayscale(0.6);
+            cursor: pointer;
+            user-select: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2px 4px;
+        }
+
+        .growth-step:hover {
+            opacity: 0.9;
+            transform: scale(1.15);
+            filter: grayscale(0);
         }
 
         .growth-step.active {
             opacity: 1;
             filter: grayscale(0);
-            transform: scale(1.25);
+            transform: scale(1.2);
             filter: drop-shadow(0 0 10px var(--accent-pink-primary));
         }
 
         .growth-arrow {
-            color: rgba(255, 133, 161, 0.4);
-            font-size: 0.85rem;
+            color: rgba(255, 133, 161, 0.45);
+            font-size: clamp(0.7rem, 2vw, 0.8rem);
+            user-select: none;
         }
 
         .rose-quote-box {
@@ -1266,6 +2351,157 @@
             font-size: 0.94rem;
             line-height: 1.6;
             margin: 0;
+        }
+
+        /* Contextual Widget Guide Popovers for Music & Rose Blooming (No Guide Button) */
+        .widget-guide-popover {
+            position: fixed;
+            z-index: 850;
+            width: 220px;
+            background: linear-gradient(145deg, rgba(35, 8, 28, 0.95), rgba(18, 4, 15, 0.98));
+            border: 1.5px solid rgba(255, 133, 161, 0.45);
+            border-radius: 16px;
+            padding: 12px 14px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 20, 147, 0.25);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .widget-guide-popover.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateY(0) scale(1);
+        }
+
+        .rose-guide-popover {
+            top: 62px;
+            left: 18px;
+            transform: translateY(-10px) scale(0.92);
+        }
+
+        .rose-guide-popover::before {
+            content: '';
+            position: absolute;
+            top: -7px;
+            left: 14px;
+            width: 12px;
+            height: 12px;
+            background: rgba(35, 8, 28, 0.95);
+            border-top: 1.5px solid rgba(255, 133, 161, 0.45);
+            border-left: 1.5px solid rgba(255, 133, 161, 0.45);
+            transform: rotate(45deg);
+        }
+
+        .music-guide-popover {
+            top: 62px;
+            right: 18px;
+            transform: translateY(-10px) scale(0.92);
+        }
+
+        .music-guide-popover::before {
+            content: '';
+            position: absolute;
+            top: -7px;
+            right: 14px;
+            width: 12px;
+            height: 12px;
+            background: rgba(35, 8, 28, 0.95);
+            border-top: 1.5px solid rgba(255, 133, 161, 0.45);
+            border-right: 1.5px solid rgba(255, 133, 161, 0.45);
+            transform: rotate(-45deg);
+        }
+
+        .nav-guide-popover {
+            bottom: 82px;
+            right: 28px;
+            top: auto;
+            transform: translateY(10px) scale(0.92);
+        }
+
+        .nav-guide-popover::before {
+            content: '';
+            position: absolute;
+            bottom: -7px;
+            top: auto;
+            right: 18px;
+            width: 12px;
+            height: 12px;
+            background: rgba(35, 8, 28, 0.95);
+            border-bottom: 1.5px solid rgba(255, 133, 161, 0.45);
+            border-right: 1.5px solid rgba(255, 133, 161, 0.45);
+            transform: rotate(45deg);
+        }
+
+        .guide-pop-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            font-family: var(--font-title);
+            font-size: 0.88rem;
+            color: var(--accent-rose-gold);
+            font-weight: 600;
+        }
+
+        .guide-pop-close {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 133, 161, 0.3);
+            color: var(--accent-pink-soft);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s ease;
+        }
+
+        .guide-pop-close:hover {
+            background: var(--accent-pink-primary);
+            color: #fff;
+        }
+
+        .guide-pop-text {
+            font-family: var(--font-body);
+            font-size: 0.78rem;
+            color: var(--text-pink-light);
+            line-height: 1.45;
+            margin: 0;
+            text-align: left;
+        }
+
+        .guide-pop-footer {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 8px;
+            padding-top: 5px;
+            border-top: 1px solid rgba(255, 133, 161, 0.15);
+        }
+
+        .guide-next-chip {
+            padding: 3px 10px;
+            border-radius: 12px;
+            background: rgba(255, 77, 136, 0.25);
+            border: 1px solid rgba(255, 182, 193, 0.4);
+            color: var(--accent-pink-cream);
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            user-select: none;
+        }
+
+        .guide-next-chip:hover {
+            background: var(--accent-pink-primary);
+            color: #ffffff;
+            box-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
         }
 
         /* Luminous Full Moon in Grand Finale Overlay */
@@ -1558,26 +2794,44 @@
             text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
         }
 
-        /* Grand Finale Overlay & Fireworks */
+        /* Grand Finale Overlay & Fireworks (Lightweight & Smooth Transitions) */
         .grand-finale-overlay {
             position: fixed;
             inset: 0;
             z-index: 10000;
-            background: radial-gradient(circle at center, rgb(2 23 43 / 96%) 0%, rgb(1 8 18 / 98%) 100%);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: radial-gradient(circle at center, rgba(2, 25, 48, 0.96) 0%, rgba(1, 8, 18, 0.98) 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             display: flex;
             align-items: center;
             justify-content: center;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 1.2s var(--ease-smooth), visibility 1.2s var(--ease-smooth);
+            transform: scale(1.02);
+            transition: opacity 0.5s var(--ease-smooth),
+                visibility 0.5s var(--ease-smooth),
+                transform 0.5s var(--ease-smooth);
             overflow: hidden;
         }
 
         .grand-finale-overlay.active {
             opacity: 1;
             visibility: visible;
+            transform: scale(1);
+        }
+
+        .grand-finale-overlay.closing {
+            opacity: 0;
+            transform: scale(0.98);
+            transition: opacity 0.35s ease,
+                transform 0.35s ease;
+        }
+
+        body.finale-active main,
+        body.finale-active .timeline-nav,
+        body.finale-active .nav-arrow {
+            opacity: 0.2;
+            transition: opacity 0.5s var(--ease-smooth);
         }
 
         #fireworks-canvas {
@@ -1627,13 +2881,14 @@
         .finale-badge {
             font-family: var(--font-body);
             font-size: clamp(0.75rem, 1.2vw, 0.85rem);
-            letter-spacing: 3px;
+            letter-spacing: 2.5px;
             text-transform: uppercase;
             color: var(--accent-rose-gold);
             margin-bottom: 12px;
             opacity: 0;
-            transform: translateY(15px);
-            transition: all 1s ease 0.3s;
+            transform: translateY(12px);
+            transition: opacity 0.45s var(--ease-smooth) 0.1s,
+                transform 0.45s var(--ease-smooth) 0.1s;
         }
 
         .grand-finale-overlay.active .finale-badge {
@@ -1644,14 +2899,15 @@
         .finale-title {
             font-family: var(--font-title);
             font-size: clamp(1.8rem, 5vw, 3.2rem);
-            background: linear-gradient(135deg, #ffffff 20%, var(--accent-pink-cream) 50%, var(--accent-rose-gold) 100%);
+            background: linear-gradient(135deg, #ffffff 10%, var(--accent-pink-cream) 45%, var(--accent-rose-gold) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(255, 77, 136, 0.6);
+            text-shadow: 0 0 35px rgba(255, 77, 136, 0.65);
             margin-bottom: 24px;
             opacity: 0;
-            transform: translateY(20px);
-            transition: all 1s ease 0.6s;
+            transform: translateY(15px);
+            transition: opacity 0.5s var(--ease-smooth) 0.18s,
+                transform 0.5s var(--ease-smooth) 0.18s;
         }
 
         .grand-finale-overlay.active .finale-title {
@@ -1660,19 +2916,22 @@
         }
 
         .countdown-wrapper {
-            background: rgb(3 23 42);
-            border: 1px solid rgb(125 174 210 / 35%);
-            border-radius: 20px;
-            padding: 20px 28px;
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 133, 161, 0.1);
+            background: rgba(3, 23, 42, 0.82);
+            border: 1px solid rgba(125, 174, 210, 0.4);
+            border-radius: 24px;
+            padding: 22px 30px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), inset 0 0 25px rgba(255, 133, 161, 0.12);
             margin-bottom: 28px;
             opacity: 0;
-            transform: translateY(20px);
-            transition: all 1s ease 0.9s;
+            transform: translateY(18px);
+            transition: opacity 0.5s var(--ease-smooth) 0.25s,
+                transform 0.5s var(--ease-smooth) 0.25s;
             width: 100%;
-            max-width: 480px;
+            max-width: 490px;
+            position: relative;
+            overflow: hidden;
         }
 
         .grand-finale-overlay.active .countdown-wrapper {
@@ -1737,18 +2996,19 @@
             }
         }
 
-        /* Step 4: After 3 seconds message */
+        /* Step 4: After 1.2 seconds message */
         .finale-heartfelt-msg {
             opacity: 0;
-            transform: translateY(30px) scale(0.95);
-            transition: all 1.2s var(--ease-smooth);
+            transform: translateY(18px);
+            transition: opacity 0.55s var(--ease-smooth),
+                transform 0.55s var(--ease-smooth);
             pointer-events: none;
             margin-top: 10px;
         }
 
         .finale-heartfelt-msg.reveal {
             opacity: 1;
-            transform: translateY(0) scale(1);
+            transform: translateY(0);
             pointer-events: auto;
         }
 
@@ -2085,6 +3345,35 @@
                 letter-spacing: 0.8px;
             }
 
+            .rose-guide-popover {
+                top: 42px;
+                left: 10px;
+                width: 190px;
+                padding: 10px 12px;
+            }
+
+            .music-guide-popover {
+                top: 42px;
+                right: 10px;
+                width: 190px;
+                padding: 10px 12px;
+            }
+
+            .nav-guide-popover {
+                bottom: 70px;
+                right: 14px;
+                width: 200px;
+                padding: 10px 12px;
+            }
+
+            .guide-pop-header {
+                font-size: 0.8rem;
+            }
+
+            .guide-pop-text {
+                font-size: 0.72rem;
+            }
+
             .timeline-nav {
                 top: 38px;
                 padding: 5px 12px;
@@ -2164,8 +3453,10 @@
         <div class="progress-bar-fill" id="progress-bar-fill"></div>
     </div>
 
-    <!-- Persistent Top Welcome Jayshree Badge -->
-    <div class="welcome-header-badge">Welcome Jayshree</div>
+    <!-- Persistent Top Welcome Jayshree Badge with Secret Moon Trigger -->
+    <div class="welcome-header-badge" id="welcome-header-badge">
+        <span class="secret-moon-btn" id="secret-moon-btn" title="A tiny secret...">🌙</span> Welcome Jayshree
+    </div>
 
     <!-- Growing Rose Corner Widget -->
     <div class="rose-corner-widget" id="rose-corner-widget" title="Click to see how your journey blooms">
@@ -2182,14 +3473,76 @@
             <h3 class="rose-modal-title" id="rose-modal-title">The Blooming Journey</h3>
             <p class="rose-modal-stage" id="rose-modal-stage">Chapter 1 of 7</p>
             <div class="rose-growth-timeline">
-                <span class="growth-step" data-step="1" title="Chapter 1">🌱</span>
+                <span class="growth-step" data-step="1" title="Chapter 1 • 🌱 A Beginning">🌱</span>
                 <span class="growth-arrow">→</span>
-                <span class="growth-step" data-step="2" title="Chapter 2">🌿</span>
+                <span class="growth-step" data-step="2" title="Chapter 2 • 🌿 Growing">🌿</span>
                 <span class="growth-arrow">→</span>
-                <span class="growth-step" data-step="5" title="Chapter 5">🌹</span>
+                <span class="growth-step" data-step="3" title="Chapter 3 • 🌿✨ Becoming">🌿✨</span>
                 <span class="growth-arrow">→</span>
-                <span class="growth-step" data-step="7" title="End">💐</span>
+                <span class="growth-step" data-step="4" title="Chapter 4 • 🌷 Blooming">🌷</span>
+                <span class="growth-arrow">→</span>
+                <span class="growth-step" data-step="6" title="Chapter 5 • 🌹✨ A Few Words I Couldn't Keep">🌹✨</span>
+                <span class="growth-arrow">→</span>
+                <span class="growth-step" data-step="7" title="Collection of Memories • 💐 A Beautiful Story">💐</span>
             </div>
+        </div>
+    </div>
+
+    <!-- Secret Hidden Easter Egg Message Overlay -->
+    <div class="secret-modal-overlay" id="secret-modal-overlay">
+        <div class="secret-modal-card">
+            <button class="secret-modal-close-icon" id="secret-modal-close-icon" aria-label="Close">&times;</button>
+            <div class="secret-modal-body">
+                <p class="secret-letter-salutation">Dear Jayshree,</p>
+                <p class="secret-letter-paragraph">If you are reading this secret letter, you found the hidden moon 🌙!
+                </p>
+                <p class="secret-letter-paragraph">This application was created with immense care and affection to
+                    preserve the wonderful moments and memories you've gifted us. Your kindness, laughter, and calm
+                    elegance make you truly one of a kind.</p>
+                <p class="secret-letter-paragraph">Never forget how bright you shine, and how much joy you bring into
+                    the lives of those around you.</p>
+                <!-- <p class="secret-letter-paragraph">May your birthday and the year ahead be as extraordinary as you are!</p> -->
+                <p class="secret-letter-valediction">Carried with love &amp; stardust ✨🌹</p>
+            </div>
+            <div class="secret-modal-footer">
+                <button class="secret-modal-close-btn" id="secret-modal-close">🌙 Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rose Blooming Widget Contextual Guide Popover (Step 1 of 3) -->
+    <div class="widget-guide-popover rose-guide-popover" id="rose-guide-popover">
+        <div class="guide-pop-header">
+            <span>🌱 Step 1 of 3 • Journey Bloomer</span>
+            <div class="guide-pop-close" id="rose-guide-close" title="Dismiss">&times;</div>
+        </div>
+        <p class="guide-pop-text">Tap this sprout anytime to see how your story blooms across chapters!</p>
+        <div class="guide-pop-footer">
+            <span class="guide-next-chip" id="rose-guide-next">Next →</span>
+        </div>
+    </div>
+
+    <!-- Music Control Orb Contextual Guide Popover (Step 2 of 3) -->
+    <div class="widget-guide-popover music-guide-popover" id="music-guide-popover">
+        <div class="guide-pop-header">
+            <span>🎵 Step 2 of 3 • Sound Control</span>
+            <div class="guide-pop-close" id="music-guide-close" title="Dismiss">&times;</div>
+        </div>
+        <p class="guide-pop-text">Tap this floating orb anytime to play or pause ambient music!</p>
+        <div class="guide-pop-footer">
+            <span class="guide-next-chip" id="music-guide-next">Next →</span>
+        </div>
+    </div>
+
+    <!-- Chapter Navigation Contextual Guide Popover (Step 3 of 3) -->
+    <div class="widget-guide-popover nav-guide-popover" id="nav-guide-popover">
+        <div class="guide-pop-header">
+            <span>🧭 Step 3 of 3 • Explore Chapters</span>
+            <div class="guide-pop-close" id="nav-guide-close" title="Dismiss">&times;</div>
+        </div>
+        <p class="guide-pop-text">Swipe left/right or click the Next button (❯) below to move through chapters!</p>
+        <div class="guide-pop-footer">
+            <span class="guide-next-chip" id="nav-guide-done">Got it ✨</span>
         </div>
     </div>
 
@@ -2210,10 +3563,48 @@
         </div>
     </button>
 
+    <!-- Cinematic Prelude Overlay -->
+    <div id="cinematic-prelude-overlay" class="prelude-overlay">
+        <canvas id="prelude-stars-canvas"></canvas>
+
+        <!-- Front Page Luminous Crescent Moon -->
+        <div class="prelude-moon-wrapper" id="prelude-moon-wrapper">
+            <div class="prelude-crescent-moon">
+                <div class="prelude-moon-crater crater-1"></div>
+                <div class="prelude-moon-crater crater-2"></div>
+                <div class="prelude-moon-crater crater-3"></div>
+            </div>
+            <div class="prelude-moon-aura"></div>
+        </div>
+
+        <div class="prelude-content">
+            <div class="prelude-quote-line line-1" id="prelude-line-1">“Some people leave memories.”</div>
+            <div class="prelude-quote-line line-2" id="prelude-line-2">“Some leave moments.”</div>
+            <div class="prelude-quote-line line-3" id="prelude-line-3">“And some…”</div>
+            <div class="prelude-quote-line line-4" id="prelude-line-4">“…quietly change the way a story feels.”</div>
+
+            <div class="prelude-welcome-container" id="prelude-welcome">
+                <div class="prelude-rose-emblem">🌹</div>
+                <h1 class="prelude-welcome-title">Welcome, Jayshree.</h1>
+                <!-- <p class="prelude-welcome-sub">The story of your quiet magic unfolds...</p> -->
+                <button class="btn prelude-enter-btn" id="prelude-enter-btn">Step Into Your Story ✨</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chapter Transition Story Interstitial Overlay -->
+    <div id="ch-transition-overlay" class="ch-transition-overlay">
+        <div class="ch-transition-content">
+            <p class="ch-transition-quote" id="ch-transition-quote">“But every beautiful presence has a story behind
+                it…”</p>
+            <div class="ch-transition-sparkle" id="ch-transition-sparkle">✨</div>
+        </div>
+    </div>
+
     <!-- Welcome Overlay -->
     <div id="welcome-screen">
         <div class="welcome-tagline">Welcome Jayshree</div>
-        <h2>The Chapters You Never Knew You Wrote</h2>
+        <h2>The Memories You Gave the World</h2>
         <p class="poetic-quote">
             “Some journeys are remembered for where they lead.
             This one is remembered for the moments it gave.
@@ -2240,9 +3631,10 @@
         <!-- Slide 1 -->
         <section class="slide active" data-bg="bg-ch1" data-title="A Beautiful Presence">
             <h2>A Beautiful Presence ✨</h2>
-            <p>Some stories are remembered for their endings; this one is cherished for its moments. These pages are
-                simply a collection of memories, admiration, and gratitude—preserved like timeless chapters that
-                continue to bring a quiet smile whenever they are revisited.</p>
+            <p>Some people have a presence that is simply hard to forget.
+                Your smile, kindness, strength, and the way you carry yourself make you quietly special.
+                There is a warmth in you that makes ordinary moments feel a little brighter.
+                This is just a small glimpse of the beautiful person you are.</p>
 
             <div class="cards-grid">
                 <div class="card">
@@ -2272,44 +3664,72 @@
         </section>
 
         <!-- Slide 2 -->
-        <section class="slide" data-bg="bg-ch2" data-title="The Story You Carry">
+        <section class="slide" id="ch2-slide" data-bg="bg-ch2" data-title="The Story You Carry">
             <h2>The Story You Carry 📖</h2>
             <p>Every story begins with a first step. Yours continued through countless moments of learning, growing, and
                 becoming. Looking back, each chapter quietly contributed to the wonderful person the world knows today.
             </p>
 
-            <div class="cards-grid">
-                <div class="card">
-                    <h3>The Beginning of a Beautiful Journey👶</h3>
-                    <p>Every beautiful story begins with a single moment, and yours began on a day that unknowingly
-                        became special for everyone whose life you would one day touch. As you grew, each stage of your
-                        childhood and school years became more than just a passage of time—they became the foundation of
-                        the thoughtful, kind, and humble person you are today. Filled with curiosity, laughter,
-                        friendships, and countless little memories, those early years quietly shaped your values, your
-                        strength, and the grace with which you continue to walk through life. Every small step you took
-                        then became part of the remarkable journey that so many admire today.</p>
+            <div class="ch2-timeline-container" id="ch2-timeline-container">
+                <!-- Vertical Traveling Glowing Line -->
+                <div class="ch2-timeline-track">
+                    <div class="ch2-glowing-line-fill" id="ch2-glowing-line">
+                        <div class="ch2-glowing-star-head"></div>
+                    </div>
                 </div>
-                <div class="card">
-                    <h3>The Journey Towards Your Dreams⭐</h3>
-                    <p>College is where dreams begin to take shape, and your journey through those years was filled with
-                        learning, growth, and discovering the person you were becoming. Every challenge strengthened
-                        your confidence, and every achievement added a new chapter to your story. As you stepped into
-                        your professional life, you embraced each opportunity with sincerity, dedication, and a constant
-                        desire to grow. What I admire even more is the courage you showed in choosing purpose over
-                        comfort, stepping away from certainty to pursue something that truly mattered to you. That
-                        decision wasn't just about changing a career—it reflected your strength, determination, and the
-                        quiet confidence to follow your own path. Looking at your journey today, it's clear that every
-                        step, every lesson, and every choice has shaped the remarkable person you continue to become.
-                    </p>
+
+                <div class="ch2-stage-item" data-stage="1">
+                    <div class="ch2-stage-node">👶</div>
+                    <div class="ch2-stage-card">
+                        <h3>The Beginning of a Beautiful Journey 👶</h3>
+                        <p>Every beautiful story begins with a single moment, and yours began on a day that unknowingly
+                            became special for everyone whose life you would one day touch. As you grew, each stage of
+                            your
+                            childhood and school years became more than just a passage of time—they became the
+                            foundation of
+                            the thoughtful, kind, and humble person you are today. Filled with curiosity, laughter,
+                            friendships, and countless little memories, those early years quietly shaped your values,
+                            your
+                            strength, and the grace with which you continue to walk through life. Every small step you
+                            took
+                            then became part of the remarkable journey that so many admire today.</p>
+                    </div>
                 </div>
-                <div class="card">
-                    <h3>The Absolute Present🌸</h3>
-                    <p>Today, you’re standing in a chapter filled with determination, hard work, and endless
-                        possibilities. Every day you spend working toward your dream is another step closer to the
-                        future you’ve imagined. No matter how challenging the journey may seem, I truly believe your
-                        perseverance, wisdom, and quiet strength will lead you exactly where you’re meant to be. I
-                        sincerely wish that this chapter becomes the beginning of all the wonderful things waiting
-                        for you.</p>
+
+                <div class="ch2-stage-item" data-stage="2">
+                    <div class="ch2-stage-node">⭐</div>
+                    <div class="ch2-stage-card">
+                        <h3>The Journey Towards Your Dreams ⭐</h3>
+                        <p>College is where dreams begin to take shape, and your journey through those years was filled
+                            with
+                            learning, growth, and discovering the person you were becoming. Every challenge strengthened
+                            your confidence, and every achievement added a new chapter to your story. As you stepped
+                            into
+                            your professional life, you embraced each opportunity with sincerity, dedication, and a
+                            constant
+                            desire to grow. What I admire even more is the courage you showed in choosing purpose over
+                            comfort, stepping away from certainty to pursue something that truly mattered to you. That
+                            decision wasn't just about changing a career—it reflected your strength, determination, and
+                            the
+                            quiet confidence to follow your own path. Looking at your journey today, it's clear that
+                            every
+                            step, every lesson, and every choice has shaped the remarkable person you continue to
+                            become.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="ch2-stage-item" data-stage="3">
+                    <div class="ch2-stage-node">🌸</div>
+                    <div class="ch2-stage-card">
+                        <h3>The Absolute Present 🌸</h3>
+                        <p>Today, you’re standing in a chapter filled with determination, hard work, and endless
+                            possibilities. Every day you spend working toward your dream is another step closer to the
+                            future you’ve imagined. No matter how challenging the journey may seem, I truly believe your
+                            perseverance, wisdom, and quiet strength will lead you exactly where you’re meant to be. I
+                            sincerely wish that this chapter becomes the beginning of all the wonderful things waiting
+                            for you.</p>
+                    </div>
                 </div>
             </div>
 
@@ -2319,13 +3739,13 @@
         </section>
 
         <!-- Slide 3 -->
-        <section class="slide" data-bg="bg-ch3" data-title=" The Little Things I Notice">
+        <section class="slide" id="ch3-slide" data-bg="bg-ch3" data-title=" The Little Things I Notice">
             <h2> The Little Things I Notice 🌸</h2>
             <p>As I turned the pages of your journey, I discovered that what makes a person truly memorable isn’t found
                 in grand moments, but in the quiet virtues they carry every day. This chapter is dedicated to those
                 qualities that have gently inspired me.</p>
 
-            <div class="cards-grid">
+            <div class="cards-grid" id="ch3-cards-grid">
                 <div class="card" data-thought="A smile that gently turns ordinary moments into beautiful memories.">
                     <h3>01. Your Smile</h3>
                     <p>Your smile has a beautiful way of making even the simplest moments feel brighter.
@@ -2582,7 +4002,7 @@
         <div class="finale-stars-layer" id="finale-stars-layer"></div>
 
         <!-- Luminous Full Moon -->
-        <div class="finale-moon-wrapper">
+        <div class="finale-moon-wrapper" id="finale-moon-wrapper">
             <div class="finale-full-moon">
                 <div class="moon-crater crater-1"></div>
                 <div class="moon-crater crater-2"></div>
@@ -2592,34 +4012,35 @@
         </div>
 
         <!-- Atmospheric Passing Clouds -->
-        <div class="clouds-layer">
+        <div class="clouds-layer" id="finale-clouds-layer">
             <div class="cloud cloud-1"></div>
             <div class="cloud cloud-2"></div>
             <div class="cloud cloud-3"></div>
             <div class="cloud cloud-4"></div>
         </div>
 
+        <!-- Cinematic Prelude Sequence Layer -->
+        <div class="finale-cinematic-layer" id="finale-cinematic-layer">
+            <canvas id="finale-stars-constellation-canvas"></canvas>
+
+            <div class="finale-cinematic-quotes" id="finale-cinematic-quotes">
+                <div class="finale-quote-item" id="fin-quote-1">“Some people enter our lives.”</div>
+                <div class="finale-quote-item" id="fin-quote-2">“Some change our days.”</div>
+                <div class="finale-quote-item" id="fin-quote-3">“And a very rare few…”</div>
+                <div class="finale-quote-item" id="fin-quote-4">“…change the way we see them.”</div>
+            </div>
+        </div>
+
         <canvas id="fireworks-canvas"></canvas>
         <button class="finale-close-btn" id="finale-close-btn" aria-label="Close Finale">&times;</button>
 
-        <div class="finale-content-box">
+        <div class="finale-content-box" id="finale-content-box">
             <div class="finale-badge">✦ A Special Celebration ✦</div>
             <h1 class="finale-title">Advance Happy Birthday</h1>
-
-            <!-- Advance Happy Birthday Wishes Card -->
-            <!-- <div class="advance-wishes-card" id="advance-wishes-card">
-                <div class="advance-wishes-header">
-                    <span class="wishes-star">✨</span>
-                    <span class="wishes-badge-text">Advance Birthday Wishes</span>
-                    <span class="wishes-star">✨</span>
-                </div>
-                <p class="advance-wishes-quote">
-                    “May your upcoming year be filled with endless smiles, quiet warmth, good health, and the fulfillment of every dream your heart carries. Countdowns are just numbers, but wishing you joy starts today and lasts forever!”
-                </p>
-            </div> -->
+            <h1 class="finale-title">Jayshree</h1>
 
             <div class="countdown-wrapper" id="countdown-wrapper">
-                <div class="countdown-title">Countdown to November 28, 2026</div>
+                <div class="countdown-title">Waiting for Your Little Day 🎀</div>
                 <div class="countdown-grid">
                     <div class="countdown-card">
                         <span class="countdown-num" id="cd-days">00</span>
@@ -2829,42 +4250,227 @@
         const roseModalStage = document.getElementById('rose-modal-stage');
         const roseSteps = document.querySelectorAll('.growth-step');
 
+        /* Contextual Sequential (One-by-One) Guide Controller */
+        const roseGuidePop = document.getElementById('rose-guide-popover');
+        const musicGuidePop = document.getElementById('music-guide-popover');
+        const navGuidePop = document.getElementById('nav-guide-popover');
+        const roseGuideClose = document.getElementById('rose-guide-close');
+        const musicGuideClose = document.getElementById('music-guide-close');
+        const navGuideClose = document.getElementById('nav-guide-close');
+        const roseGuideNext = document.getElementById('rose-guide-next');
+        const musicGuideNext = document.getElementById('music-guide-next');
+        const navGuideDone = document.getElementById('nav-guide-done');
+        let step1Timer, step2Timer, step3Timer;
+
+        function showStep1() {
+            hideWidgetGuides();
+            if (roseGuidePop) roseGuidePop.classList.add('active');
+            if (typeof createStardustBurst === 'function') {
+                createStardustBurst(35, 35, 8);
+            }
+            step1Timer = setTimeout(() => {
+                showStep2();
+            }, 4500);
+        }
+
+        function showStep2() {
+            hideWidgetGuides();
+            if (musicGuidePop) musicGuidePop.classList.add('active');
+            if (typeof createStardustBurst === 'function') {
+                createStardustBurst(window.innerWidth - 35, 35, 8);
+            }
+            step2Timer = setTimeout(() => {
+                showStep3();
+            }, 4500);
+        }
+
+        function showStep3() {
+            hideWidgetGuides();
+            if (navGuidePop) navGuidePop.classList.add('active');
+            if (typeof createStardustBurst === 'function') {
+                createStardustBurst(window.innerWidth - 45, window.innerHeight - 45, 8);
+            }
+            step3Timer = setTimeout(() => {
+                hideWidgetGuides();
+            }, 5000);
+        }
+
+        function hideWidgetGuides() {
+            if (step1Timer) clearTimeout(step1Timer);
+            if (step2Timer) clearTimeout(step2Timer);
+            if (step3Timer) clearTimeout(step3Timer);
+            if (roseGuidePop) roseGuidePop.classList.remove('active');
+            if (musicGuidePop) musicGuidePop.classList.remove('active');
+            if (navGuidePop) navGuidePop.classList.remove('active');
+        }
+
+        if (roseGuideNext) {
+            roseGuideNext.addEventListener('click', (e) => {
+                e.stopPropagation();
+                showStep2();
+            });
+        }
+
+        if (musicGuideNext) {
+            musicGuideNext.addEventListener('click', (e) => {
+                e.stopPropagation();
+                showStep3();
+            });
+        }
+
+        if (navGuideDone) {
+            navGuideDone.addEventListener('click', (e) => {
+                e.stopPropagation();
+                hideWidgetGuides();
+            });
+        }
+
+        if (roseGuideClose) {
+            roseGuideClose.addEventListener('click', (e) => {
+                e.stopPropagation();
+                hideWidgetGuides();
+            });
+        }
+
+        if (musicGuideClose) {
+            musicGuideClose.addEventListener('click', (e) => {
+                e.stopPropagation();
+                hideWidgetGuides();
+            });
+        }
+
+        if (navGuideClose) {
+            navGuideClose.addEventListener('click', (e) => {
+                e.stopPropagation();
+                hideWidgetGuides();
+            });
+        }
+
         function getRoseStageInfo(index, total) {
             const chNum = index + 1;
             let icon = '🌱';
-            let label = `Chapter 1 • 🌱 Sprout`;
+            let label = `Chapter 1 • 🌱 A Beginning`;
+            let stageName = `A Beginning`;
             let stepNum = 1;
 
             if (index === 0) {
                 icon = '🌱';
-                label = `Chapter 1 • 🌱 Sprout`;
+                label = `Chapter 1 • 🌱 A Beginning`;
+                stageName = `A Beginning`;
                 stepNum = 1;
-            } else if (index === 1 || index === 2) {
+            } else if (index === 1) {
                 icon = '🌿';
-                label = `Chapter ${chNum} • 🌿 Growing Leaf`;
+                label = `Chapter 2 • 🌿 Growing`;
+                stageName = `Growing`;
                 stepNum = 2;
+            } else if (index === 2) {
+                icon = '🌿✨';
+                label = `Chapter 3 • 🌿✨ Becoming`;
+                stageName = `Becoming`;
+                stepNum = 3;
             } else if (index === 3) {
                 icon = '🌷';
-                label = `Chapter ${chNum} • 🌷 Quiet Bud`;
-                stepNum = 3;
-            } else if (index >= 4 && index < total - 1) {
-                icon = '🌹';
-                label = `Chapter ${chNum} • 🌹 Blooming Rose`;
-                stepNum = 5;
-            } else if (index === total - 1) {
+                label = `Chapter 4 • 🌷 Blooming`;
+                stageName = `Blooming`;
+                stepNum = 4;
+            } else if (index === 4) {
+                icon = '🌹✨';
+                label = `Chapter 5 • 🌹✨ A Few Words I Couldn't Keep`;
+                stageName = `A Few Words I Couldn't Keep`;
+                stepNum = 6;
+            } else if (index >= 5 || index === total - 1) {
                 icon = '💐';
-                label = `End of Journey • 💐 Full Bouquet`;
+                label = `Collection of Memories • 💐 A Beautiful Story`;
+                stageName = `Collection of Memories`;
                 stepNum = 7;
             }
 
-            return { icon, label, stepNum, chNum, isEnd: index === total - 1 };
+            return { icon, label, stageName, stepNum, chNum, isEnd: index >= 5 || index === total - 1 };
+        }
+
+        function renderAnimatedRoseSVG(stageNum) {
+            return `
+                <svg class="living-animated-rose rose-stage-${stageNum}" viewBox="0 0 100 100">
+                    <path class="rose-soil" d="M 30,92 Q 50,85 70,92 Q 50,96 30,92 Z" fill="#2d131f" stroke="rgba(255,133,161,0.3)" stroke-width="1" />
+                    <circle class="rose-sprout-dot" cx="50" cy="88" r="3.5" fill="#66bb6a" />
+                    <path class="rose-stem-line" d="M 50,88 Q 48,65 50,42" fill="none" stroke="#4caf50" stroke-width="4" stroke-linecap="round" />
+                    <g class="rose-leaf-group left-leaf">
+                        <path d="M 49,70 Q 32,65 30,55 Q 42,56 49,68 Z" fill="#66bb6a" stroke="#2e7d32" stroke-width="0.8" />
+                    </g>
+                    <g class="rose-leaf-group right-leaf">
+                        <path d="M 51,60 Q 68,55 70,45 Q 58,46 51,58 Z" fill="#81c784" stroke="#2e7d32" stroke-width="0.8" />
+                    </g>
+                    <g class="rose-bud-group">
+                        <path class="rose-calyx" d="M 45,45 Q 50,48 55,45 Q 50,38 45,45 Z" fill="#4caf50" />
+                        <path class="rose-bud-body" d="M 45,44 Q 50,22 55,44 Q 50,48 45,44 Z" fill="url(#rosePetalGrad)" />
+                    </g>
+                    <g class="rose-bloom-group">
+                        <path class="petal petal-1" d="M 50,42 C 32,32 30,16 50,25 C 70,16 68,32 50,42 Z" fill="url(#rosePetalGrad)" />
+                        <path class="petal petal-2" d="M 50,40 C 38,24 24,28 35,16 C 50,20 50,35 50,40 Z" fill="#ff4d88" opacity="0.9" />
+                        <path class="petal petal-3" d="M 50,40 C 62,24 76,28 65,16 C 50,20 50,35 50,40 Z" fill="#ff3377" opacity="0.9" />
+                        <circle cx="50" cy="22" r="4" fill="#ffd700" />
+                    </g>
+                    <g class="rose-bouquet-group">
+                        <circle class="bouquet-halo" cx="50" cy="50" r="42" fill="rgba(255, 133, 161, 0.12)" stroke="rgba(255, 215, 0, 0.8)" stroke-width="1.8" stroke-dasharray="4 4" />
+                        <text x="50" y="66" text-anchor="middle" font-size="58">💐</text>
+                    </g>
+                    <defs>
+                        <linearGradient id="rosePetalGrad" x1="0" y1="1" x2="0" y2="0">
+                            <stop offset="0%" stop-color="#e91e63" />
+                            <stop offset="60%" stop-color="#ff4d88" />
+                            <stop offset="100%" stop-color="#ffb6c1" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            `;
+        }
+
+        function triggerRoseTravelParticles(targetIndex) {
+            const roseWidget = document.getElementById('rose-corner-widget');
+            if (!roseWidget) return;
+
+            const rect = roseWidget.getBoundingClientRect();
+            const targetX = rect.left + rect.width / 2;
+            const targetY = rect.top + rect.height / 2;
+
+            const startX = window.innerWidth / 2;
+            const startY = window.innerHeight / 2;
+
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    const particle = document.createElement('div');
+                    particle.className = 'rose-traveling-stardust';
+
+                    const spreadX = startX + (Math.random() * 120 - 60);
+                    const spreadY = startY + (Math.random() * 120 - 60);
+
+                    particle.style.left = `${spreadX}px`;
+                    particle.style.top = `${spreadY}px`;
+                    document.body.appendChild(particle);
+
+                    requestAnimationFrame(() => {
+                        particle.style.transform = `translate(${targetX - spreadX}px, ${targetY - spreadY}px) scale(0.2)`;
+                        particle.style.opacity = '0';
+                    });
+
+                    setTimeout(() => {
+                        particle.remove();
+                        if (i === 9) {
+                            updateRoseWidget(targetIndex);
+                            if (typeof createStardustBurst === 'function') {
+                                createStardustBurst(targetX, targetY, 14);
+                            }
+                        }
+                    }, 750);
+                }, i * 60);
+            }
         }
 
         function updateRoseWidget(index) {
             if (!roseWidget) return;
             const info = getRoseStageInfo(index, slides.length);
 
-            roseIconContainer.textContent = info.icon;
+            roseIconContainer.innerHTML = renderAnimatedRoseSVG(info.stepNum);
             roseTooltip.textContent = info.label;
 
             roseWidget.classList.remove('pop-grow');
@@ -2872,18 +4478,14 @@
             roseWidget.classList.add('pop-grow');
 
             roseWidget.classList.toggle('final-stage', info.isEnd);
-
-            if (info.isEnd && typeof createStardustBurst === 'function') {
-                const rect = roseWidget.getBoundingClientRect();
-                createStardustBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 16);
-            }
         }
 
         if (roseWidget) {
             roseWidget.addEventListener('click', () => {
+                if (typeof hideWidgetGuides === 'function') hideWidgetGuides();
                 const info = getRoseStageInfo(currentSlide, slides.length);
-                roseBloomDisplay.textContent = info.icon;
-                roseModalStage.textContent = `Chapter ${info.chNum} of ${slides.length}`;
+                roseBloomDisplay.innerHTML = renderAnimatedRoseSVG(info.stepNum);
+                roseModalStage.textContent = `${info.label}`;
                 roseModalTitle.textContent = info.isEnd ? "A Quiet Bloom" : "The Blooming Journey";
 
                 roseSteps.forEach(step => {
@@ -2907,6 +4509,487 @@
                     roseModalOverlay.classList.remove('active');
                 }
             });
+
+            roseSteps.forEach(step => {
+                step.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const stepVal = parseInt(step.getAttribute('data-step'), 10);
+                    let targetSlide = 0;
+                    if (stepVal === 1) targetSlide = 0;
+                    else if (stepVal === 2) targetSlide = 1;
+                    else if (stepVal === 3) targetSlide = 2;
+                    else if (stepVal === 4) targetSlide = 3;
+                    else if (stepVal === 5 || stepVal === 6) targetSlide = 4;
+                    else if (stepVal === 7) targetSlide = 5;
+
+                    if (typeof goToSlide === 'function') {
+                        goToSlide(targetSlide);
+                    }
+                    const info = getRoseStageInfo(targetSlide, slides.length);
+                    roseBloomDisplay.innerHTML = renderAnimatedRoseSVG(info.stepNum);
+                    roseModalStage.textContent = `${info.label}`;
+                    roseModalTitle.textContent = info.isEnd ? "Collection of Memories" : "The Blooming Journey";
+
+                    roseSteps.forEach(s => {
+                        const sVal = parseInt(s.getAttribute('data-step'), 10);
+                        s.classList.toggle('active', info.stepNum >= sVal);
+                    });
+
+                    if (typeof createStardustBurst === 'function') {
+                        const rect = step.getBoundingClientRect();
+                        createStardustBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 12);
+                    }
+                });
+            });
+        }
+
+        /* Cinematic Prelude Controller & Stardust Constellation Canvas */
+        const preludeOverlay = document.getElementById('cinematic-prelude-overlay');
+        const preludeCanvas = document.getElementById('prelude-stars-canvas');
+        const preludeSkipBtn = document.getElementById('prelude-skip-btn');
+        const preludeEnterBtn = document.getElementById('prelude-enter-btn');
+        const preludeWelcome = document.getElementById('prelude-welcome');
+
+        /* Helper to draw tiny 4-point sparkling star icons on canvas */
+        function drawTinyStarIcon(ctx, cx, cy, radius, color) {
+            if (radius <= 0) return;
+            const innerRadius = radius * 0.35;
+            ctx.save();
+            ctx.beginPath();
+            ctx.translate(cx, cy);
+            ctx.moveTo(0, -radius);
+            ctx.lineTo(innerRadius, -innerRadius);
+            ctx.lineTo(radius, 0);
+            ctx.lineTo(innerRadius, innerRadius);
+            ctx.lineTo(0, radius);
+            ctx.lineTo(-innerRadius, innerRadius);
+            ctx.lineTo(-radius, 0);
+            ctx.lineTo(-innerRadius, -innerRadius);
+            ctx.closePath();
+            ctx.fillStyle = color;
+            ctx.shadowColor = 'rgba(255, 180, 210, 0.6)';
+            ctx.shadowBlur = Math.max(2, radius * 1.4);
+            ctx.fill();
+            ctx.restore();
+        }
+
+        /* Precision Star Constellation Generator for Name "JAYSHREE" */
+        function getJayshreeConstellationData(centerX, centerY, canvasWidth) {
+            const points = [];
+            const strokePairs = [];
+
+            const isMobile = canvasWidth < 500;
+            const totalWidth = isMobile ? Math.min(canvasWidth * 0.92, 350) : Math.min(canvasWidth * 0.85, 620);
+            const letterHeight = isMobile ? Math.min(totalWidth * 0.22, 65) : Math.min(totalWidth * 0.18, 90);
+
+            const totalLetters = 8;
+            const letterWidth = totalWidth / (totalLetters + 1.2);
+            const gap = letterWidth * 0.25;
+            const stride = letterWidth + gap;
+            const startX = centerX - ((totalLetters * stride - gap) / 2);
+            const topY = centerY - (letterHeight / 2);
+
+            const letters = ['J', 'A', 'Y', 'S', 'H', 'R', 'E', 'E'];
+            let globalPointIndex = 0;
+
+            letters.forEach((char, lIdx) => {
+                const boxX = startX + lIdx * stride;
+                const w = letterWidth;
+                const h = letterHeight;
+
+                const x0 = boxX;
+                const x1 = boxX + w * 0.5;
+                const x2 = boxX + w;
+
+                const y0 = topY;
+                const y1 = topY + h * 0.25;
+                const y2 = topY + h * 0.5;
+                const y3 = topY + h * 0.75;
+                const y4 = topY + h;
+
+                let letterPoints = [];
+
+                if (char === 'J') {
+                    letterPoints = [
+                        { x: x0, y: y0 }, { x: x1, y: y0 }, { x: x2, y: y0 },
+                        { x: x2, y: y2 }, { x: x2, y: y4 },
+                        { x: x1, y: y4 }, { x: x0, y: y3 }
+                    ];
+                    const pIdx = globalPointIndex;
+                    strokePairs.push(
+                        [pIdx + 0, pIdx + 1], [pIdx + 1, pIdx + 2],
+                        [pIdx + 2, pIdx + 3], [pIdx + 3, pIdx + 4],
+                        [pIdx + 4, pIdx + 5], [pIdx + 5, pIdx + 6]
+                    );
+                } else if (char === 'A') {
+                    letterPoints = [
+                        { x: x0, y: y4 }, { x: x0 + w * 0.25, y: y2 }, { x: x1, y: y0 },
+                        { x: x0 + w * 0.75, y: y2 }, { x: x2, y: y4 },
+                        { x: x0 + w * 0.25, y: topY + h * 0.55 }, { x: x0 + w * 0.75, y: topY + h * 0.55 }
+                    ];
+                    const pIdx = globalPointIndex;
+                    strokePairs.push(
+                        [pIdx + 0, pIdx + 1], [pIdx + 1, pIdx + 2],
+                        [pIdx + 2, pIdx + 3], [pIdx + 3, pIdx + 4],
+                        [pIdx + 5, pIdx + 6]
+                    );
+                } else if (char === 'Y') {
+                    letterPoints = [
+                        { x: x0, y: y0 }, { x: x1, y: y2 }, { x: x2, y: y0 },
+                        { x: x1, y: y4 }
+                    ];
+                    const pIdx = globalPointIndex;
+                    strokePairs.push(
+                        [pIdx + 0, pIdx + 1], [pIdx + 2, pIdx + 1], [pIdx + 1, pIdx + 3]
+                    );
+                } else if (char === 'S') {
+                    letterPoints = [
+                        { x: x2, y: y0 + h * 0.1 }, { x: x1, y: y0 }, { x: x0, y: y1 },
+                        { x: x1, y: y2 },
+                        { x: x2, y: y3 }, { x: x1, y: y4 }, { x: x0, y: y4 - h * 0.1 }
+                    ];
+                    const pIdx = globalPointIndex;
+                    strokePairs.push(
+                        [pIdx + 0, pIdx + 1], [pIdx + 1, pIdx + 2],
+                        [pIdx + 2, pIdx + 3], [pIdx + 3, pIdx + 4],
+                        [pIdx + 4, pIdx + 5], [pIdx + 5, pIdx + 6]
+                    );
+                } else if (char === 'H') {
+                    letterPoints = [
+                        { x: x0, y: y0 }, { x: x0, y: y2 }, { x: x0, y: y4 },
+                        { x: x2, y: y0 }, { x: x2, y: y2 }, { x: x2, y: y4 }
+                    ];
+                    const pIdx = globalPointIndex;
+                    strokePairs.push(
+                        [pIdx + 0, pIdx + 1], [pIdx + 1, pIdx + 2],
+                        [pIdx + 3, pIdx + 4], [pIdx + 4, pIdx + 5],
+                        [pIdx + 1, pIdx + 4]
+                    );
+                } else if (char === 'R') {
+                    letterPoints = [
+                        { x: x0, y: y0 }, { x: x0, y: y2 }, { x: x0, y: y4 },
+                        { x: x2, y: y0 }, { x: x2, y: topY + h * 0.3 }, { x: x0, y: y2 },
+                        { x: x2, y: y4 }
+                    ];
+                    const pIdx = globalPointIndex;
+                    strokePairs.push(
+                        [pIdx + 0, pIdx + 1], [pIdx + 1, pIdx + 2],
+                        [pIdx + 0, pIdx + 3], [pIdx + 3, pIdx + 4],
+                        [pIdx + 4, pIdx + 5], [pIdx + 1, pIdx + 5], [pIdx + 5, pIdx + 6]
+                    );
+                } else if (char === 'E') {
+                    letterPoints = [
+                        { x: x0, y: y0 }, { x: x0, y: y2 }, { x: x0, y: y4 },
+                        { x: x2, y: y0 }, { x: x1 + w * 0.2, y: y2 }, { x: x2, y: y4 }
+                    ];
+                    const pIdx = globalPointIndex;
+                    strokePairs.push(
+                        [pIdx + 0, pIdx + 1], [pIdx + 1, pIdx + 2],
+                        [pIdx + 0, pIdx + 3], [pIdx + 1, pIdx + 4],
+                        [pIdx + 2, pIdx + 5]
+                    );
+                }
+
+                letterPoints.forEach(pt => {
+                    points.push(pt);
+                    globalPointIndex++;
+                });
+            });
+
+            return { points, strokePairs };
+        }
+
+        if (preludeOverlay && preludeCanvas) {
+            const ctx = preludeCanvas.getContext('2d');
+            let pWidth = 0, pHeight = 0;
+            let preludeStars = [];
+            let preludeAnimId = null;
+            let constellationProgress = 0;
+            let isFormingConstellation = false;
+
+            function resizePreludeCanvas() {
+                pWidth = preludeCanvas.width = window.innerWidth;
+                pHeight = preludeCanvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resizePreludeCanvas);
+            resizePreludeCanvas();
+
+            const centerX = pWidth / 2;
+            const centerY = Math.max(90, pHeight * 0.20);
+            const constellationData = getJayshreeConstellationData(centerX, centerY, pWidth);
+            const constellationPoints = constellationData.points;
+            const strokePairs = constellationData.strokePairs;
+
+            const starCount = Math.max(constellationPoints.length + 30, 80);
+            for (let i = 0; i < starCount; i++) {
+                preludeStars.push({
+                    x: Math.random() * pWidth,
+                    y: Math.random() * pHeight,
+                    radius: Math.random() * 1.8 + 0.7,
+                    alpha: Math.random() * 0.7 + 0.1,
+                    speed: Math.random() * 0.015 + 0.005,
+                    phase: Math.random() * Math.PI * 2,
+                    targetX: i < constellationPoints.length ? constellationPoints[i].x : null,
+                    targetY: i < constellationPoints.length ? constellationPoints[i].y : null
+                });
+            }
+
+            function animatePreludeCanvas() {
+                ctx.clearRect(0, 0, pWidth, pHeight);
+
+                if (isFormingConstellation && constellationProgress < 1) {
+                    constellationProgress = Math.min(1, constellationProgress + 0.009);
+                }
+
+                const easeRatio = constellationProgress > 0 ? 1 - Math.pow(1 - constellationProgress, 3) : 0;
+                const drawnPoints = [];
+
+                preludeStars.forEach(s => {
+                    s.phase += s.speed;
+                    const currentAlpha = Math.sin(s.phase) * 0.4 + 0.5;
+
+                    let drawX = s.x;
+                    let drawY = s.y;
+                    if (s.targetX !== null && constellationProgress > 0) {
+                        drawX = s.x + (s.targetX - s.x) * easeRatio;
+                        drawY = s.y + (s.targetY - s.y) * easeRatio;
+                    }
+                    drawnPoints.push({ x: drawX, y: drawY });
+
+                    const starSize = s.targetX !== null && constellationProgress > 0
+                        ? Math.max(1.3, s.radius * (0.65 + easeRatio * 0.35))
+                        : Math.max(1.0, s.radius * 0.7);
+                    const starColor = s.targetX !== null && constellationProgress > 0
+                        ? `rgba(255, 245, 252, ${0.45 + easeRatio * 0.45})`
+                        : `rgba(255, 220, 235, ${currentAlpha * 0.65})`;
+                    drawTinyStarIcon(ctx, drawX, drawY, starSize, starColor);
+                });
+
+                if (constellationProgress > 0.05) {
+                    const lineAlpha = Math.min(1, (constellationProgress - 0.05) * 1.15) * 0.28;
+                    ctx.strokeStyle = `rgba(255, 215, 230, ${lineAlpha})`;
+                    ctx.lineWidth = 0.8;
+                    ctx.shadowBlur = 4;
+                    ctx.shadowColor = 'rgba(255, 133, 161, 0.4)';
+
+                    strokePairs.forEach(pair => {
+                        const p1 = drawnPoints[pair[0]];
+                        const p2 = drawnPoints[pair[1]];
+                        if (p1 && p2) {
+                            ctx.beginPath();
+                            ctx.moveTo(p1.x, p1.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.stroke();
+                        }
+                    });
+                    ctx.shadowBlur = 0;
+                }
+
+                preludeAnimId = requestAnimationFrame(animatePreludeCanvas);
+            }
+            animatePreludeCanvas();
+
+            const line1 = document.getElementById('prelude-line-1');
+            const line2 = document.getElementById('prelude-line-2');
+            const line3 = document.getElementById('prelude-line-3');
+            const line4 = document.getElementById('prelude-line-4');
+
+            let seqTimers = [];
+
+            function runPreludeSequence() {
+                seqTimers.push(setTimeout(() => {
+                    if (line1) line1.classList.add('active');
+                }, 800));
+
+                seqTimers.push(setTimeout(() => {
+                    if (line1) {
+                        line1.classList.remove('active');
+                        line1.classList.add('exit');
+                    }
+                }, 3200));
+
+                seqTimers.push(setTimeout(() => {
+                    if (line2) line2.classList.add('active');
+                }, 3800));
+
+                seqTimers.push(setTimeout(() => {
+                    if (line2) {
+                        line2.classList.remove('active');
+                        line2.classList.add('exit');
+                    }
+                }, 6200));
+
+                seqTimers.push(setTimeout(() => {
+                    if (line3) line3.classList.add('active');
+                }, 6800));
+
+                seqTimers.push(setTimeout(() => {
+                    if (line3) {
+                        line3.classList.remove('active');
+                        line3.classList.add('exit');
+                    }
+                }, 8800));
+
+                seqTimers.push(setTimeout(() => {
+                    if (line4) line4.classList.add('active');
+                }, 9400));
+
+                seqTimers.push(setTimeout(() => {
+                    if (line4) {
+                        line4.classList.remove('active');
+                        line4.classList.add('exit');
+                    }
+                }, 12200));
+
+                seqTimers.push(setTimeout(() => {
+                    isFormingConstellation = true;
+                    if (preludeWelcome) preludeWelcome.classList.add('active');
+                    if (typeof createStardustBurst === 'function') {
+                        createStardustBurst(pWidth / 2, pHeight / 2 - 20, 30);
+                    }
+                }, 12800));
+            }
+
+            runPreludeSequence();
+
+            function closePrelude() {
+                seqTimers.forEach(t => clearTimeout(t));
+                if (preludeOverlay) preludeOverlay.classList.add('hidden');
+                setTimeout(() => {
+                    if (preludeAnimId) cancelAnimationFrame(preludeAnimId);
+                }, 1200);
+            }
+
+            if (preludeEnterBtn) preludeEnterBtn.addEventListener('click', closePrelude);
+        }
+
+        /* Chapter 2 Glowing Line Timeline Controller */
+        const ch2Container = document.getElementById('ch2-timeline-container');
+        const ch2GlowingLine = document.getElementById('ch2-glowing-line');
+        let updateCh2TimelineProgress = null;
+
+        if (ch2Container && ch2GlowingLine) {
+            const ch2Stages = ch2Container.querySelectorAll('.ch2-stage-item');
+
+            updateCh2TimelineProgress = function () {
+                const ch2Slide = document.getElementById('ch2-slide');
+                if (!ch2Slide || !ch2Slide.classList.contains('active')) return;
+
+                const containerRect = ch2Container.getBoundingClientRect();
+                const containerTop = containerRect.top;
+                const containerHeight = containerRect.height;
+                const viewHeight = window.innerHeight;
+
+                let visibleProgress = 0;
+                const scrollOffset = viewHeight * 0.7 - containerTop;
+                if (scrollOffset > 0) {
+                    visibleProgress = Math.min(100, Math.max(15, (scrollOffset / containerHeight) * 100));
+                }
+
+                ch2GlowingLine.style.height = `${visibleProgress}%`;
+
+                ch2Stages.forEach((stage, idx) => {
+                    const node = stage.querySelector('.ch2-stage-node');
+                    if (node) {
+                        const nodeRect = node.getBoundingClientRect();
+                        const nodeCenterRelative = nodeRect.top + nodeRect.height / 2 - containerRect.top;
+                        const lineTipPosition = (visibleProgress / 100) * containerHeight;
+
+                        if (lineTipPosition >= nodeCenterRelative - 30 || idx === 0) {
+                            if (!stage.classList.contains('stage-active')) {
+                                stage.classList.add('stage-active');
+                                if (typeof createStardustBurst === 'function') {
+                                    createStardustBurst(nodeRect.left + nodeRect.width / 2, nodeRect.top + nodeRect.height / 2, 16);
+                                }
+                            }
+                        }
+                    }
+                });
+            };
+
+            ch2Stages.forEach(stage => {
+                const node = stage.querySelector('.ch2-stage-node');
+                if (node) {
+                    node.addEventListener('click', () => {
+                        const nodeRect = node.getBoundingClientRect();
+                        stage.classList.add('stage-active');
+                        if (typeof createStardustBurst === 'function') {
+                            createStardustBurst(nodeRect.left + nodeRect.width / 2, nodeRect.top + nodeRect.height / 2, 20);
+                        }
+                    });
+                }
+            });
+
+            const ch2Slide = document.getElementById('ch2-slide');
+            if (ch2Slide) {
+                ch2Slide.addEventListener('scroll', updateCh2TimelineProgress, { passive: true });
+            }
+        }
+
+        /* Chapter 3 Magical Blur & Unblur Card Reveal Logic */
+        const ch3CardsGrid = document.getElementById('ch3-cards-grid');
+        let checkCh3ScrollReveals = null;
+
+        if (ch3CardsGrid) {
+            const ch3Cards = ch3CardsGrid.querySelectorAll('.card');
+
+            function revealCh3Card(card) {
+                if (!card || !card.classList.contains('blurred-card')) return;
+
+                card.classList.remove('blurred-card');
+                card.classList.add('revealed-card', 'unblur-anim');
+
+                const hint = card.querySelector('.card-reveal-hint');
+                if (hint) {
+                    hint.style.opacity = '0';
+                    hint.style.transform = 'translate(-50%, -50%) scale(0.8)';
+                    setTimeout(() => hint.remove(), 350);
+                }
+
+                if (typeof createStardustBurst === 'function') {
+                    const rect = card.getBoundingClientRect();
+                    const burstX = rect.left + rect.width / 2;
+                    const burstY = rect.top + rect.height / 2;
+                    createStardustBurst(burstX, burstY, 18);
+                }
+            }
+
+            ch3Cards.forEach((card, index) => {
+                if (index > 0) {
+                    card.classList.add('blurred-card');
+
+                    const hint = document.createElement('div');
+                    hint.className = 'card-reveal-hint';
+                    hint.innerHTML = '✨ Tap to reveal 🌸';
+                    card.appendChild(hint);
+
+                    card.addEventListener('click', (e) => {
+                        if (card.classList.contains('blurred-card')) {
+                            e.stopPropagation();
+                            revealCh3Card(card);
+                        }
+                    });
+                } else {
+                    card.classList.add('revealed-card');
+                }
+            });
+
+            const ch3Slide = document.getElementById('ch3-slide') || ch3CardsGrid.closest('.slide');
+            if (ch3Slide) {
+                checkCh3ScrollReveals = function () {
+                    if (!ch3Slide.classList.contains('active')) return;
+                    ch3Cards.forEach(card => {
+                        if (card.classList.contains('blurred-card')) {
+                            const rect = card.getBoundingClientRect();
+                            if (rect.top > 0 && rect.top < window.innerHeight * 0.82) {
+                                revealCh3Card(card);
+                            }
+                        }
+                    });
+                };
+
+                ch3Slide.addEventListener('scroll', checkCh3ScrollReveals, { passive: true });
+            }
         }
 
         let currentSlide = 0;
@@ -2916,7 +4999,7 @@
             const step = document.createElement('div');
             step.className = `timeline-step ${index === 0 ? 'active' : ''}`;
             step.innerHTML = `<div class="timeline-dot"></div><span>${slide.dataset.title}</span>`;
-            step.addEventListener('click', () => goToSlide(index));
+            // Blocked chapter on-click redirection as requested: timeline steps are now visual indicators
             timelineNav.appendChild(step);
 
             if (index < slides.length - 1) {
@@ -2931,9 +5014,74 @@
             progressBarFill.style.width = `${percentage}%`;
         }
 
+        /* Chapter Transition Story Messages Mapping & Controller */
+        const transitionStories = {
+            'welcome-0': { quote: '“Every story has a beginning, but some begin with a quiet magic…”', icon: '🌱' },
+            '0-1': { quote: '“But every beautiful presence has a story behind it…”', icon: '✨' },
+            '1-2': { quote: '“And somewhere along that journey, there were things worth admiring.”', icon: '✨' },
+            '2-3': { quote: '“Admiration slowly became something deeper…”', icon: '✨' },
+            '3-4': { quote: '“And somehow, life began to feel a little different.”', icon: '✨' },
+            '4-5': { quote: '“Some feelings are easier to write than to say.”', icon: '💌' },
+            '5-6': { quote: '“And so, every memory became a constellation in my heart.”', icon: '🌌' }
+        };
+
+        const chTransOverlay = document.getElementById('ch-transition-overlay');
+        const chTransQuote = document.getElementById('ch-transition-quote');
+        const chTransSparkle = document.getElementById('ch-transition-sparkle');
+        let chTransTimeout = null;
+
+        function showChapterTransitionStory(fromKey, toIndex, callback) {
+            const key = `${fromKey}-${toIndex}`;
+            const story = transitionStories[key];
+
+            if (!story || !chTransOverlay || !chTransQuote) {
+                callback();
+                return;
+            }
+
+            clearTimeout(chTransTimeout);
+
+            chTransQuote.textContent = story.quote;
+            if (chTransSparkle) chTransSparkle.textContent = story.icon || '✨';
+
+            chTransOverlay.classList.add('active');
+
+            if (typeof createStardustBurst === 'function') {
+                createStardustBurst(window.innerWidth / 2, window.innerHeight / 2, 22);
+            }
+
+            let hasTriggered = false;
+            const hideStoryAndProceed = () => {
+                if (hasTriggered) return;
+                hasTriggered = true;
+                clearTimeout(chTransTimeout);
+                chTransOverlay.classList.remove('active');
+
+                // Redirect to next chapter ONLY AFTER transition overlay fade-out completes (450ms)
+                setTimeout(() => {
+                    callback();
+                }, 450);
+            };
+
+            chTransOverlay.onclick = hideStoryAndProceed;
+            chTransTimeout = setTimeout(hideStoryAndProceed, 1600);
+        }
+
         function goToSlide(targetIndex) {
             if (targetIndex === currentSlide || isTransitioning || targetIndex < 0 || targetIndex >= slides.length) return;
 
+            isTransitioning = true; // Lock immediately to prevent double click/swipe during transition
+
+            if (targetIndex > currentSlide && transitionStories[`${currentSlide}-${targetIndex}`]) {
+                showChapterTransitionStory(currentSlide, targetIndex, () => {
+                    performSlideTransition(targetIndex);
+                });
+            } else {
+                performSlideTransition(targetIndex);
+            }
+        }
+
+        function performSlideTransition(targetIndex) {
             isTransitioning = true;
             const isForward = targetIndex > currentSlide;
             const oldSlide = slides[currentSlide];
@@ -2958,6 +5106,15 @@
             updateProgressBar();
             if (typeof updateRoseWidget === 'function') {
                 updateRoseWidget(currentSlide);
+            }
+            if (typeof triggerRoseTravelParticles === 'function') {
+                triggerRoseTravelParticles(targetIndex);
+            }
+            if (typeof checkCh3ScrollReveals === 'function' && slides[targetIndex] && slides[targetIndex].id === 'ch3-slide') {
+                setTimeout(checkCh3ScrollReveals, 350);
+            }
+            if (typeof updateCh2TimelineProgress === 'function' && slides[targetIndex] && slides[targetIndex].id === 'ch2-slide') {
+                setTimeout(updateCh2TimelineProgress, 350);
             }
 
             const activeBgId = newSlide.dataset.bg;
@@ -2999,6 +5156,10 @@
                     audioBtn.classList.add('playing');
                 }).catch(() => { });
             }
+
+            showChapterTransitionStory('welcome', 0, () => {
+                showStep1();
+            });
         });
 
         window.addEventListener('keydown', (e) => {
@@ -3008,16 +5169,19 @@
             }
         });
 
-        /* Interactive Physics-Based Touch Swipe Physics */
-        let touchStartX = 0, touchStartY = 0, currentDeltaX = 0;
+        /* Touch Gesture & Swipe Handling (Strictly isolated from vertical scrolling) */
+        let touchStartX = 0, touchStartY = 0, currentDeltaX = 0, currentDeltaY = 0;
         let isSwiping = false, isScrolling = false;
         let activeSlide = null;
 
         window.addEventListener('touchstart', (e) => {
             if (!welcomeScreen.classList.contains('hidden') || isTransitioning) return;
+            if (!e.touches || e.touches.length === 0) return;
+
             touchStartX = e.touches[0].clientX;
             touchStartY = e.touches[0].clientY;
             currentDeltaX = 0;
+            currentDeltaY = 0;
             isSwiping = false;
             isScrolling = false;
             activeSlide = slides[currentSlide];
@@ -3025,16 +5189,26 @@
 
         window.addEventListener('touchmove', (e) => {
             if (!activeSlide || isTransitioning || isScrolling) return;
+            if (!e.touches || e.touches.length === 0) return;
+
             const deltaX = e.touches[0].clientX - touchStartX;
             const deltaY = e.touches[0].clientY - touchStartY;
 
-            if (!isSwiping && !isScrolling) {
-                if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 8) {
-                    isSwiping = true;
-                } else if (Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > 8) {
-                    isScrolling = true;
-                    return;
+            // If vertical movement is detected at all (scrolling inside chapter div), lock as vertical scrolling immediately
+            if (Math.abs(deltaY) > 5 || Math.abs(deltaY) >= Math.abs(deltaX)) {
+                isScrolling = true;
+                isSwiping = false;
+                if (activeSlide) {
+                    activeSlide.style.transform = '';
+                    activeSlide.style.opacity = '';
+                    activeSlide.classList.remove('swiping');
                 }
+                return;
+            }
+
+            // Only recognize horizontal swipe if movement is clearly horizontal and exceeds threshold
+            if (Math.abs(deltaX) > 35 && Math.abs(deltaX) > Math.abs(deltaY) * 3) {
+                isSwiping = true;
             }
 
             if (isSwiping) {
@@ -3042,21 +5216,20 @@
                 activeSlide.classList.add('swiping');
 
                 if ((currentSlide === 0 && deltaX > 0) || (currentSlide === slides.length - 1 && deltaX < 0)) {
-                    currentDeltaX = deltaX * 0.25;
+                    currentDeltaX = deltaX * 0.2;
                 }
 
-                const opacity = 1 - Math.abs(currentDeltaX) / (window.innerWidth * 0.75);
+                const opacity = 1 - Math.abs(currentDeltaX) / (window.innerWidth * 0.85);
                 activeSlide.style.transform = `translate3d(${currentDeltaX}px, 0, 0)`;
-                activeSlide.style.opacity = Math.max(opacity, 0.15);
+                activeSlide.style.opacity = Math.max(opacity, 0.2);
             }
         }, { passive: true });
 
         window.addEventListener('touchend', () => {
             if (!activeSlide) return;
-            activeSlide.classList.remove('swiping');
 
-            if (isSwiping && !isTransitioning) {
-                const swipeThreshold = Math.min(window.innerWidth * 0.18, 90);
+            if (isSwiping && !isTransitioning && !isScrolling) {
+                const swipeThreshold = Math.min(window.innerWidth * 0.25, 120);
 
                 if (currentDeltaX < -swipeThreshold && currentSlide < slides.length - 1) {
                     goToSlide(currentSlide + 1);
@@ -3071,8 +5244,10 @@
                 activeSlide.style.opacity = '';
             }
 
+            if (activeSlide) activeSlide.classList.remove('swiping');
             activeSlide = null;
             currentDeltaX = 0;
+            currentDeltaY = 0;
             isSwiping = false;
             isScrolling = false;
         }, { passive: true });
@@ -3118,6 +5293,7 @@
 
         if (audioBtn) {
             audioBtn.addEventListener('click', () => {
+                if (typeof hideWidgetGuides === 'function') hideWidgetGuides();
                 isPlaying = !isPlaying;
                 audioBtn.classList.toggle('playing', isPlaying);
 
@@ -3397,6 +5573,211 @@
             document.getElementById('cd-secs').textContent = String(secs).padStart(2, '0');
         }
 
+        /* Grand Finale Cinematic Sequence Controller */
+        let finaleStarAnimId = null;
+        let finaleCinematicTimers = [];
+
+        function startJayshreeConstellation() {
+            const fCanvas = document.getElementById('finale-stars-constellation-canvas');
+            if (!fCanvas) return;
+            const fCtx = fCanvas.getContext('2d');
+            const w = fCanvas.width = window.innerWidth;
+            const h = fCanvas.height = window.innerHeight;
+
+            const centerX = w / 2;
+            const centerY = Math.max(90, h * 0.20);
+
+            const constellationData = getJayshreeConstellationData(centerX, centerY, w);
+            const targetPoints = constellationData.points;
+            const strokePairs = constellationData.strokePairs;
+
+            const starCount = Math.max(targetPoints.length + 25, 80);
+            const stars = [];
+            for (let i = 0; i < starCount; i++) {
+                stars.push({
+                    x: Math.random() * w,
+                    y: Math.random() * h,
+                    size: Math.random() * 2.2 + 0.8,
+                    alpha: 0,
+                    targetAlpha: Math.random() * 0.7 + 0.3,
+                    speed: Math.random() * 0.02 + 0.008,
+                    phase: Math.random() * Math.PI * 2,
+                    targetX: i < targetPoints.length ? targetPoints[i].x : null,
+                    targetY: i < targetPoints.length ? targetPoints[i].y : null
+                });
+            }
+
+            if (finaleStarAnimId) cancelAnimationFrame(finaleStarAnimId);
+
+            let startTime = performance.now();
+
+            function renderStars(now) {
+                const elapsed = (now - startTime) / 1000;
+                fCtx.clearRect(0, 0, w, h);
+
+                let formRatio = Math.min(1, elapsed / 2.0);
+                const easeRatio = 1 - Math.pow(1 - formRatio, 3);
+                let fadeRatio = 1;
+                if (elapsed > 3.4) {
+                    fadeRatio = Math.max(0, 1 - (elapsed - 3.4) / 1.2);
+                }
+
+                const currentPoints = [];
+
+                stars.forEach(s => {
+                    s.phase += s.speed;
+                    const tw = Math.sin(s.phase) * 0.3 + 0.7;
+
+                    let curX = s.x;
+                    let curY = s.y;
+
+                    if (s.targetX !== null) {
+                        curX = s.x + (s.targetX - s.x) * easeRatio;
+                        curY = s.y + (s.targetY - s.y) * easeRatio;
+                    }
+                    currentPoints.push({ x: curX, y: curY });
+
+                    const starSize = Math.max(1.2, s.size * tw * (0.55 + easeRatio * 0.35));
+                    const starColor = `rgba(255, 245, 252, ${s.targetAlpha * tw * fadeRatio * 0.85})`;
+                    drawTinyStarIcon(fCtx, curX, curY, starSize, starColor);
+                });
+
+                if (formRatio > 0.05) {
+                    const lineAlpha = Math.min(1, (formRatio - 0.05) * 1.1) * 0.25 * fadeRatio;
+                    fCtx.strokeStyle = `rgba(255, 215, 230, ${lineAlpha})`;
+                    fCtx.lineWidth = 0.8;
+                    fCtx.shadowBlur = 4;
+                    fCtx.shadowColor = 'rgba(255, 133, 161, 0.4)';
+
+                    strokePairs.forEach(pair => {
+                        const p1 = currentPoints[pair[0]];
+                        const p2 = currentPoints[pair[1]];
+                        if (p1 && p2) {
+                            fCtx.beginPath();
+                            fCtx.moveTo(p1.x, p1.y);
+                            fCtx.lineTo(p2.x, p2.y);
+                            fCtx.stroke();
+                        }
+                    });
+                    fCtx.shadowBlur = 0;
+                }
+
+                if (elapsed < 4.8) {
+                    finaleStarAnimId = requestAnimationFrame(renderStars);
+                } else {
+                    fCtx.clearRect(0, 0, w, h);
+                }
+            }
+
+            finaleStarAnimId = requestAnimationFrame(renderStars);
+        }
+
+        function runGrandFinaleCinematicSequence() {
+            const cinLayer = document.getElementById('finale-cinematic-layer');
+            const contentBox = document.getElementById('finale-content-box');
+            const moonWrap = document.getElementById('finale-moon-wrapper');
+            const cloudsWrap = document.getElementById('finale-clouds-layer');
+            const q1 = document.getElementById('fin-quote-1');
+            const q2 = document.getElementById('fin-quote-2');
+            const q3 = document.getElementById('fin-quote-3');
+            const q4 = document.getElementById('fin-quote-4');
+
+            finaleCinematicTimers.forEach(t => clearTimeout(t));
+            finaleCinematicTimers = [];
+
+            if (cinLayer) cinLayer.style.opacity = '1';
+            if (contentBox) contentBox.classList.remove('cinematic-done');
+            if (moonWrap) {
+                moonWrap.style.transition = 'opacity 1.2s ease';
+                moonWrap.style.opacity = '1';
+            }
+            if (cloudsWrap) {
+                cloudsWrap.style.transition = 'opacity 1.2s ease';
+                cloudsWrap.style.opacity = '1';
+            }
+            [q1, q2, q3, q4].forEach(q => { if (q) q.classList.remove('active', 'exit'); });
+
+            clearInterval(fireworksBatchInterval);
+            fireworks = [];
+            fwParticles = [];
+
+            startJayshreeConstellation();
+
+            // Quote 1
+            finaleCinematicTimers.push(setTimeout(() => {
+                if (q1) q1.classList.add('active');
+            }, 4000));
+
+            finaleCinematicTimers.push(setTimeout(() => {
+                if (q1) { q1.classList.remove('active'); q1.classList.add('exit'); }
+            }, 6400));
+
+            // Quote 2
+            finaleCinematicTimers.push(setTimeout(() => {
+                if (q2) q2.classList.add('active');
+            }, 7000));
+
+            finaleCinematicTimers.push(setTimeout(() => {
+                if (q2) { q2.classList.remove('active'); q2.classList.add('exit'); }
+            }, 9400));
+
+            // Quote 3
+            finaleCinematicTimers.push(setTimeout(() => {
+                if (q3) q3.classList.add('active');
+            }, 10000));
+
+            finaleCinematicTimers.push(setTimeout(() => {
+                if (q3) { q3.classList.remove('active'); q3.classList.add('exit'); }
+            }, 12400));
+
+            // Quote 4
+            finaleCinematicTimers.push(setTimeout(() => {
+                if (q4) q4.classList.add('active');
+            }, 13000));
+
+            finaleCinematicTimers.push(setTimeout(() => {
+                if (q4) { q4.classList.remove('active'); q4.classList.add('exit'); }
+            }, 15600));
+
+            // Final Climax - Celebration Div appears & Fireworks launch AFTER
+            finaleCinematicTimers.push(setTimeout(() => {
+                finishGrandFinaleCinematic();
+            }, 16400));
+
+            // Tap anywhere during cinematic to skip to climax immediately
+            if (cinLayer) {
+                cinLayer.onclick = () => {
+                    finishGrandFinaleCinematic();
+                };
+            }
+        }
+
+        function finishGrandFinaleCinematic() {
+            finaleCinematicTimers.forEach(t => clearTimeout(t));
+            finaleCinematicTimers = [];
+
+            const cinLayer = document.getElementById('finale-cinematic-layer');
+            const contentBox = document.getElementById('finale-content-box');
+            const moonWrap = document.getElementById('finale-moon-wrapper');
+            const cloudsWrap = document.getElementById('finale-clouds-layer');
+
+            if (cinLayer) cinLayer.style.opacity = '0';
+            if (moonWrap) moonWrap.style.opacity = '1';
+            if (cloudsWrap) cloudsWrap.style.opacity = '1';
+
+            setTimeout(() => {
+                if (contentBox) contentBox.classList.add('cinematic-done');
+                if (typeof createStardustBurst === 'function') {
+                    createStardustBurst(window.innerWidth / 2, window.innerHeight / 2, 35);
+                }
+
+                // THEN FIREWORKS START NOW (earned finale timing!)
+                launchMinimalFireworksBatch();
+                clearInterval(fireworksBatchInterval);
+                fireworksBatchInterval = setInterval(launchMinimalFireworksBatch, 1800);
+            }, 400);
+        }
+
         function triggerGrandFinale() {
             if (!finaleOverlay) return;
 
@@ -3408,6 +5789,8 @@
             fireworks = [];
             fwParticles = [];
 
+            document.body.classList.add('finale-active');
+            finaleOverlay.classList.remove('closing');
             finaleOverlay.classList.add('active');
             resizeFwCanvas();
 
@@ -3416,15 +5799,11 @@
             clearInterval(countdownInterval);
             countdownInterval = setInterval(updateCountdown, 1000);
 
-            launchMinimalFireworksBatch();
-            fireworksBatchInterval = setInterval(launchMinimalFireworksBatch, 1800);
+            runGrandFinaleCinematicSequence();
 
             finaleMsgTimeout = setTimeout(() => {
                 finaleHeartfeltMsg.classList.add('reveal');
-                if (typeof createStardustBurst === 'function') {
-                    createStardustBurst(window.innerWidth / 2, window.innerHeight / 2, 35);
-                }
-            }, 3000);
+            }, 19000);
         }
 
         if (finaleBtn) {
@@ -3433,10 +5812,15 @@
 
         if (finaleCloseBtn) {
             finaleCloseBtn.addEventListener('click', () => {
-                finaleOverlay.classList.remove('active');
-                if (fwAnimId) cancelAnimationFrame(fwAnimId);
-                clearInterval(countdownInterval);
-                clearInterval(fireworksBatchInterval);
+                finaleOverlay.classList.add('closing');
+                document.body.classList.remove('finale-active');
+
+                setTimeout(() => {
+                    finaleOverlay.classList.remove('active', 'closing');
+                    if (fwAnimId) cancelAnimationFrame(fwAnimId);
+                    clearInterval(countdownInterval);
+                    clearInterval(fireworksBatchInterval);
+                }, 350);
             });
         }
 
@@ -3445,6 +5829,47 @@
                 const targetX = e.clientX;
                 const targetY = e.clientY;
                 createExplosion(targetX, targetY);
+            });
+        }
+
+        /* Secret Hidden Easter Egg Controller */
+        const secretMoonBtn = document.getElementById('secret-moon-btn');
+        const secretModalOverlay = document.getElementById('secret-modal-overlay');
+        const secretModalClose = document.getElementById('secret-modal-close');
+        const secretModalCloseIcon = document.getElementById('secret-modal-close-icon');
+
+        const closeSecretModal = (e) => {
+            if (secretModalOverlay) {
+                secretModalOverlay.classList.remove('active');
+                if (e && typeof createStardustBurst === 'function' && e.currentTarget) {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    createStardustBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 12);
+                }
+            }
+        };
+
+        if (secretMoonBtn && secretModalOverlay) {
+            secretMoonBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                secretModalOverlay.classList.add('active');
+                if (typeof createStardustBurst === 'function') {
+                    const rect = secretMoonBtn.getBoundingClientRect();
+                    createStardustBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 20);
+                }
+            });
+        }
+
+        if (secretModalClose) {
+            secretModalClose.addEventListener('click', closeSecretModal);
+        }
+        if (secretModalCloseIcon) {
+            secretModalCloseIcon.addEventListener('click', closeSecretModal);
+        }
+        if (secretModalOverlay) {
+            secretModalOverlay.addEventListener('click', (e) => {
+                if (e.target === secretModalOverlay) {
+                    closeSecretModal(e);
+                }
             });
         }
 

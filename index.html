@@ -790,10 +790,13 @@
         }
 
         @keyframes bouquet-pulse {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: scale(1);
                 filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.8));
             }
+
             50% {
                 transform: scale(1.08);
                 filter: drop-shadow(0 0 22px rgba(255, 133, 161, 0.95));
@@ -943,19 +946,25 @@
         }
 
         @keyframes prelude-moon-float {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translateY(0) rotate(0deg);
             }
+
             50% {
                 transform: translateY(-7px) rotate(-3deg);
             }
         }
 
         @keyframes prelude-moon-aura-pulse {
-            0%, 100% {
+
+            0%,
+            100% {
                 opacity: 0.65;
                 transform: scale(1);
             }
+
             50% {
                 opacity: 1;
                 transform: scale(1.15);
@@ -5417,49 +5426,44 @@
             constructor(startX, startY, targetX, targetY) {
                 this.x = startX;
                 this.y = startY;
-                this.startX = startX;
-                this.startY = startY;
+                this.px = startX;
+                this.py = startY;
                 this.targetX = targetX;
                 this.targetY = targetY;
                 this.distanceToTarget = Math.hypot(targetX - startX, targetY - startY);
-                this.distanceTraveled = 0;
-                this.coordinates = [];
-                this.coordinateCount = 3;
-                while (this.coordinateCount--) {
-                    this.coordinates.push([this.x, this.y]);
-                }
                 this.angle = Math.atan2(targetY - startY, targetX - startX);
-                this.speed = 3;
-                this.acceleration = 1.05;
-                this.brightness = Math.random() * 50 + 50;
+                this.speed = 6.8;
+                this.alive = true;
+                this.hue = Math.random() * 60 + 310;
             }
 
-            update(index) {
-                this.coordinates.pop();
-                this.coordinates.unshift([this.x, this.y]);
-                this.speed *= this.acceleration;
+            update() {
+                this.px = this.x;
+                this.py = this.y;
                 const vx = Math.cos(this.angle) * this.speed;
                 const vy = Math.sin(this.angle) * this.speed;
+                this.x += vx;
+                this.y += vy;
 
-                this.distanceTraveled = Math.hypot(this.startX - this.x, this.startY - this.y);
+                const distCovered = Math.hypot(this.x - (this.targetX - Math.cos(this.angle) * this.distanceToTarget), this.y - (this.targetY - Math.sin(this.angle) * this.distanceToTarget));
 
-                if (this.distanceTraveled >= this.distanceToTarget) {
+                if (distCovered >= this.distanceToTarget || this.y <= this.targetY) {
                     createExplosion(this.targetX, this.targetY);
-                    fireworks.splice(index, 1);
-                } else {
-                    this.x += vx;
-                    this.y += vy;
+                    this.alive = false;
                 }
             }
 
             draw() {
-                if (!fwCtx) return;
+                if (!fwCtx || !this.alive) return;
                 fwCtx.beginPath();
-                fwCtx.moveTo(this.coordinates[this.coordinates.length - 1][0], this.coordinates[this.coordinates.length - 1][1]);
+                fwCtx.moveTo(this.px, this.py);
                 fwCtx.lineTo(this.x, this.y);
-                fwCtx.strokeStyle = `hsl(${Math.random() * 360}, 100%, 70%)`;
-                fwCtx.lineWidth = 2;
+                fwCtx.strokeStyle = `hsl(${this.hue}, 100%, 75%)`;
+                fwCtx.lineWidth = 2.2;
+                fwCtx.shadowBlur = 8;
+                fwCtx.shadowColor = 'rgba(255, 133, 161, 0.85)';
                 fwCtx.stroke();
+                fwCtx.shadowBlur = 0;
             }
         }
 
@@ -5467,56 +5471,54 @@
             constructor(x, y, vx, vy, hue) {
                 this.x = x;
                 this.y = y;
-                this.coordinates = [];
-                this.coordinateCount = 5;
-                while (this.coordinateCount--) {
-                    this.coordinates.push([this.x, this.y]);
-                }
+                this.px = x;
+                this.py = y;
                 this.vx = vx;
                 this.vy = vy;
-                this.friction = 0.96;
-                this.gravity = 0.08;
+                this.friction = 0.955;
+                this.gravity = 0.07;
                 this.hue = hue || (Math.random() * 60 + 320);
-                this.brightness = Math.random() * 40 + 60;
+                this.brightness = Math.random() * 35 + 65;
                 this.alpha = 1;
-                this.decay = Math.random() * 0.015 + 0.01;
+                this.decay = Math.random() * 0.014 + 0.009;
+                this.alive = true;
+                this.size = Math.random() * 1.5 + 1.2;
             }
 
-            update(index) {
-                this.coordinates.pop();
-                this.coordinates.unshift([this.x, this.y]);
+            update() {
+                this.px = this.x;
+                this.py = this.y;
                 this.vx *= this.friction;
                 this.vy *= this.friction;
                 this.vy += this.gravity;
                 this.x += this.vx;
                 this.y += this.vy;
                 this.alpha -= this.decay;
-
-                if (this.alpha <= this.decay) {
-                    fwParticles.splice(index, 1);
+                if (this.alpha <= 0) {
+                    this.alive = false;
                 }
             }
 
             draw() {
-                if (!fwCtx) return;
+                if (!fwCtx || !this.alive || this.alpha <= 0) return;
                 fwCtx.beginPath();
-                fwCtx.moveTo(this.coordinates[this.coordinates.length - 1][0], this.coordinates[this.coordinates.length - 1][1]);
+                fwCtx.moveTo(this.px, this.py);
                 fwCtx.lineTo(this.x, this.y);
                 fwCtx.strokeStyle = `hsla(${this.hue}, 100%, ${this.brightness}%, ${this.alpha})`;
-                fwCtx.lineWidth = 2.5;
+                fwCtx.lineWidth = this.size;
                 fwCtx.stroke();
             }
         }
 
         function createExplosion(x, y) {
-            const particleCount = 85;
+            const particleCount = 65;
             const baseHue = Math.random() * 80 + 310;
             for (let i = 0; i < particleCount; i++) {
                 const t = (i / particleCount) * Math.PI * 2;
                 const heartX = 16 * Math.pow(Math.sin(t), 3);
                 const heartY = -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
 
-                const speedScale = 0.28 + Math.random() * 0.06;
+                const speedScale = 0.26 + Math.random() * 0.06;
                 const vx = heartX * speedScale;
                 const vy = heartY * speedScale;
 
@@ -5526,23 +5528,27 @@
         }
 
         function animateFireworks() {
-            if (!finaleOverlay || !finaleOverlay.classList.contains('active')) return;
+            if (!finaleOverlay || !finaleOverlay.classList.contains('active')) {
+                fwAnimId = null;
+                return;
+            }
+
             fwCtx.globalCompositeOperation = 'destination-out';
-            fwCtx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+            fwCtx.fillStyle = 'rgba(0, 0, 0, 0.18)';
             fwCtx.fillRect(0, 0, fwWidth, fwHeight);
             fwCtx.globalCompositeOperation = 'lighter';
 
-            let i = fireworks.length;
-            while (i--) {
+            for (let i = 0; i < fireworks.length; i++) {
+                fireworks[i].update();
                 fireworks[i].draw();
-                fireworks[i].update(i);
             }
+            fireworks = fireworks.filter(f => f.alive);
 
-            let j = fwParticles.length;
-            while (j--) {
+            for (let j = 0; j < fwParticles.length; j++) {
+                fwParticles[j].update();
                 fwParticles[j].draw();
-                fwParticles[j].update(j);
             }
+            fwParticles = fwParticles.filter(p => p.alive);
 
             fwAnimId = requestAnimationFrame(animateFireworks);
         }
@@ -5794,6 +5800,7 @@
             finaleOverlay.classList.add('active');
             resizeFwCanvas();
 
+            if (fwAnimId) cancelAnimationFrame(fwAnimId);
             animateFireworks();
             updateCountdown();
             clearInterval(countdownInterval);

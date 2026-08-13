@@ -1228,13 +1228,47 @@
             }
         }
 
+        .inline-drifting-star {
+            display: inline-block;
+            font-size: 1.5rem;
+            color: var(--accent-rose-gold);
+            margin-bottom: 6px;
+            filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.95)) drop-shadow(0 0 25px rgba(255, 77, 136, 0.9));
+            animation: floating-bloom 2.5s infinite ease-in-out;
+        }
+
+        .finale-epilogue-badge {
+            font-family: var(--font-title);
+            font-size: clamp(1.4rem, 4vw, 2.2rem);
+            color: var(--accent-rose-gold);
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+            text-shadow: 0 0 25px rgba(255, 77, 136, 0.85);
+        }
+
+        .finale-epilogue-sub {
+            font-family: var(--font-body);
+            font-size: clamp(0.95rem, 2.2vw, 1.25rem);
+            color: var(--accent-pink-cream);
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .finale-epilogue-stat {
+            font-family: var(--font-title);
+            font-size: clamp(1.2rem, 3.2vw, 1.8rem);
+            color: var(--accent-pink-cream);
+            line-height: 1.65;
+            text-shadow: 0 0 20px rgba(255, 77, 136, 0.7);
+        }
+
         .finale-cinematic-quotes {
             position: relative;
             z-index: 3;
             text-align: center;
-            max-width: 600px;
+            max-width: 650px;
             width: 90%;
-            min-height: 80px;
+            min-height: 100px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1268,6 +1302,162 @@
             filter: blur(8px);
         }
 
+        /* Secret Epilogue Post-Finale Sequence Overlay */
+        .secret-epilogue-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 10;
+            pointer-events: none;
+            opacity: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1.5s ease;
+        }
+
+        .secret-epilogue-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .epilogue-drifting-star {
+            position: absolute;
+            color: var(--accent-pink-cream);
+            font-size: 1.1rem;
+            opacity: 0;
+            filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.9)) drop-shadow(0 0 25px rgba(255, 77, 136, 0.85));
+            transition: opacity 1.5s ease, transform 14s linear;
+            pointer-events: none;
+        }
+
+        .epilogue-drifting-star.star-1 {
+            top: 25%;
+            left: 20%;
+        }
+
+        .epilogue-drifting-star.star-2 {
+            top: 60%;
+            right: 22%;
+        }
+
+        .epilogue-drifting-star.active {
+            opacity: 1;
+            transform: translate(65px, -35px) scale(1.3);
+        }
+
+        .epilogue-text-container {
+            position: relative;
+            z-index: 5;
+            text-align: center;
+            max-width: 680px;
+            width: 90%;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .epilogue-secret-line {
+            position: absolute;
+            font-family: var(--font-title);
+            font-size: clamp(1.35rem, 3.8vw, 2.2rem);
+            color: var(--accent-pink-cream);
+            text-shadow: 0 0 25px rgba(255, 77, 136, 0.85), 0 0 50px rgba(255, 182, 193, 0.5);
+            line-height: 1.55;
+            opacity: 0;
+            transform: translateY(18px) scale(0.96);
+            filter: blur(8px);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 1s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+        }
+
+        .epilogue-secret-line.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0px);
+        }
+
+        .epilogue-secret-line.exit {
+            opacity: 0;
+            transform: translateY(-18px) scale(1.04);
+            filter: blur(8px);
+        }
+
+        /* Epilogue Moon & Interactive Hint Chip */
+        .secret-epilogue-moon-container {
+            opacity: 0;
+            transform: scale(0.85);
+            filter: blur(10px);
+            transition: all 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            z-index: 6;
+        }
+
+        .secret-epilogue-moon-container.active {
+            opacity: 1;
+            transform: scale(1);
+            filter: blur(0px);
+            pointer-events: auto;
+        }
+
+        .secret-epilogue-moon {
+            font-size: clamp(4.5rem, 9.5vw, 7.0rem);
+            cursor: pointer;
+            position: relative;
+            user-select: none;
+            filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.85)) drop-shadow(0 0 50px rgba(255, 77, 136, 0.65));
+            animation: epilogue-moon-pulse 3.5s infinite ease-in-out;
+            transition: transform 0.4s ease, filter 0.4s ease;
+        }
+
+        .secret-epilogue-moon:hover {
+            transform: scale(1.15) rotate(-10deg);
+            filter: drop-shadow(0 0 35px rgba(255, 220, 100, 1)) drop-shadow(0 0 70px rgba(255, 77, 136, 0.95));
+        }
+
+        @keyframes epilogue-moon-pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 22px rgba(255, 215, 0, 0.7)) drop-shadow(0 0 45px rgba(255, 77, 136, 0.5));
+            }
+
+            50% {
+                transform: scale(1.08);
+                filter: drop-shadow(0 0 35px rgba(255, 235, 120, 0.95)) drop-shadow(0 0 65px rgba(255, 77, 136, 0.8));
+            }
+        }
+
+        .finale-moon-wrapper {
+            position: absolute;
+            top: 35px;
+            right: 40px;
+            width: 76px;
+            height: 76px;
+            z-index: 5;
+            pointer-events: none;
+            transition: all 0.5s ease;
+        }
+
+        .finale-full-moon {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, #fffef0 0%, #ffeaa7 45%, #f7d6e1 75%, #e84393 100%);
+            box-shadow: inset -8px -8px 18px rgba(0, 0, 0, 0.35), 0 0 35px rgba(255, 225, 180, 0.85);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s ease, filter 0.4s ease;
+        }
+
         /* Finale Content Box Initial State (Hidden until Cinematic completes) */
         .finale-content-box {
             position: relative;
@@ -1282,6 +1472,42 @@
         .finale-content-box.cinematic-done {
             opacity: 1;
             transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
+
+        .finale-heartfelt-msg {
+            opacity: 0;
+            transform: translateY(28px) scale(0.97);
+            filter: blur(6px);
+            transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+            will-change: opacity, transform, filter;
+        }
+
+        .finale-heartfelt-msg.reveal {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0px);
+            pointer-events: auto;
+        }
+
+        .whatsapp-note-card {
+            opacity: 0;
+            transform: translateY(22px) scale(0.94);
+            filter: blur(5px);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 1s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+            will-change: opacity, transform, filter;
+        }
+
+        .whatsapp-note-card.reveal {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0px);
             pointer-events: auto;
         }
 
@@ -1343,6 +1569,7 @@
             color: #fae3eb;
             max-height: 90vh;
             overflow-y: auto;
+            scrollbar-width: none;
         }
 
         .secret-modal-overlay.active .secret-modal-card {
@@ -3594,7 +3821,7 @@
 
             <div class="prelude-welcome-container" id="prelude-welcome">
                 <div class="prelude-rose-emblem">🌹</div>
-                <h1 class="prelude-welcome-title">Welcome, Jayshree.</h1>
+                <h1 class="prelude-welcome-title">Welcome Jayshree</h1>
                 <!-- <p class="prelude-welcome-sub">The story of your quiet magic unfolds...</p> -->
                 <button class="btn prelude-enter-btn" id="prelude-enter-btn">Step Into Your Story ✨</button>
             </div>
@@ -4033,12 +4260,64 @@
             <canvas id="finale-stars-constellation-canvas"></canvas>
 
             <div class="finale-cinematic-quotes" id="finale-cinematic-quotes">
-                <div class="finale-quote-item" id="fin-quote-1">“Some people enter our lives.”</div>
-                <div class="finale-quote-item" id="fin-quote-2">“Some change our days.”</div>
-                <div class="finale-quote-item" id="fin-quote-3">“And a very rare few…”</div>
-                <div class="finale-quote-item" id="fin-quote-4">“…change the way we see them.”</div>
+                <!-- 1. "Wait..." with star -->
+                <div class="finale-quote-item" id="fin-quote-1">
+                    <span class="inline-drifting-star">✦</span><br>
+                    “Wait…”
+                </div>
+
+                <!-- 2. "There is one more thing." with star -->
+                <div class="finale-quote-item" id="fin-quote-2">
+                    <span class="inline-drifting-star">✨</span><br>
+                    “There is one more thing.”
+                </div>
+
+                <!-- 3. "This application has a beginning." -->
+                <div class="finale-quote-item" id="fin-quote-3">
+                    “This application has a beginning.”
+                </div>
+
+                <!-- 4. "It has a middle." -->
+                <div class="finale-quote-item" id="fin-quote-4">
+                    “It has a middle.”
+                </div>
+
+                <!-- 5. "But maybe…" -->
+                <div class="finale-quote-item" id="fin-quote-5">
+                    “But maybe…”
+                </div>
+
+                <!-- 6. “…it doesn't have to have an ending.” -->
+                <div class="finale-quote-item" id="fin-quote-6">
+                    “…it doesn't have to have an ending.”
+                </div>
+
+                <!-- 7. Journey completed ✨ / You made it all the way here. -->
+                <div class="finale-quote-item" id="fin-quote-7">
+                    <div class="finale-epilogue-badge">Journey completed ✨</div>
+                    <div class="finale-epilogue-sub">You made it all the way here.</div>
+                </div>
+
+                <!-- 8. “Thank you for staying until the last page.” -->
+                <div class="finale-quote-item" id="fin-quote-8">
+                    “Thank you for staying until the last page.”
+                </div>
+
+                <!-- 9. 7 chapters. 1 story. Countless little memories. -->
+                <div class="finale-quote-item" id="fin-quote-9">
+                    <div class="finale-epilogue-stat">7 chapters.</div>
+                    <div class="finale-epilogue-stat">1 story.</div>
+                    <div class="finale-epilogue-stat">Countless little memories.</div>
+                </div>
+
+                <!-- 10. “And somehow, it still feels like there was more to say.” -->
+                <div class="finale-quote-item" id="fin-quote-10">
+                    “And somehow, it still feels like there was more to say.”
+                </div>
             </div>
         </div>
+
+
 
         <canvas id="fireworks-canvas"></canvas>
         <button class="finale-close-btn" id="finale-close-btn" aria-label="Close Finale">&times;</button>
@@ -4079,18 +4358,18 @@
                 <h3 class="heartfelt-subtitle">For Existing</h3>
                 <p class="heartfelt-quote">“Some souls don't ask for a place in our story; they quietly become one of
                     its most beautiful chapters.”</p>
+            </div>
 
-                <!-- WhatsApp Single Line Pill Button -->
-                <div class="whatsapp-note-card" id="whatsapp-btn">
-                    <div class="whatsapp-icon-wrapper">
-                        <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M19.05 4.91A9.816 9.816 0 0 0 12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01zm-7.01 15.24c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.32a8.198 8.198 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.42 5.83c0 4.54-3.7 8.23-8.23 8.24zm4.52-6.16c-.25-.12-1.47-.72-1.69-.8-.23-.08-.39-.12-.56.12-.17.25-.66.8-.81.97-.15.17-.3.19-.55.07-.25-.12-1.05-.39-2.01-1.24-.74-.66-1.25-1.48-1.39-1.73-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.17-.24.25-.4.08-.17.04-.31-.02-.43s-.56-1.35-.77-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.77 2.71 4.29 3.8.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.18-.47-.3z" />
-                        </svg>
-                    </div>
-                    <span class="whatsapp-text-single">Which chapter made you smile the most ✨ <br> Share your thoughts
-                        💬</span>
+            <!-- WhatsApp Single Line Pill Button -->
+            <div class="whatsapp-note-card" id="whatsapp-btn">
+                <div class="whatsapp-icon-wrapper">
+                    <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M19.05 4.91A9.816 9.816 0 0 0 12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01zm-7.01 15.24c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.32a8.198 8.198 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.42 5.83c0 4.54-3.7 8.23-8.23 8.24zm4.52-6.16c-.25-.12-1.47-.72-1.69-.8-.23-.08-.39-.12-.56.12-.17.25-.66.8-.81.97-.15.17-.3.19-.55.07-.25-.12-1.05-.39-2.01-1.24-.74-.66-1.25-1.48-1.39-1.73-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.17-.24.25-.4.08-.17.04-.31-.02-.43s-.56-1.35-.77-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.77 2.71 4.29 3.8.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.18-.47-.3z" />
+                    </svg>
                 </div>
+                <span class="whatsapp-text-single">Which chapter made you smile the most ✨ <br> Share your thoughts
+                    💬</span>
             </div>
         </div>
     </div>
@@ -5064,12 +5343,14 @@
                 if (hasTriggered) return;
                 hasTriggered = true;
                 clearTimeout(chTransTimeout);
-                chTransOverlay.classList.remove('active');
 
-                // Redirect to next chapter ONLY AFTER transition overlay fade-out completes (450ms)
+                // Switch slide to target chapter WHILE overlay is active (so new chapter is loaded underneath!)
+                callback();
+
+                // Smoothly fade out transition story overlay to reveal the new chapter underneath
                 setTimeout(() => {
-                    callback();
-                }, 450);
+                    chTransOverlay.classList.remove('active');
+                }, 80);
             };
 
             chTransOverlay.onclick = hideStoryAndProceed;
@@ -5373,6 +5654,7 @@
         let fwAnimId = null;
         let countdownInterval = null;
         let finaleMsgTimeout = null;
+        let whatsappBtnTimeout = null;
         let fireworksBatchInterval = null;
 
         function initFinaleStars() {
@@ -5678,21 +5960,30 @@
             finaleStarAnimId = requestAnimationFrame(renderStars);
         }
 
+        let moonClickHandled = false;
+
         function runGrandFinaleCinematicSequence() {
             const cinLayer = document.getElementById('finale-cinematic-layer');
             const contentBox = document.getElementById('finale-content-box');
             const moonWrap = document.getElementById('finale-moon-wrapper');
             const cloudsWrap = document.getElementById('finale-clouds-layer');
-            const q1 = document.getElementById('fin-quote-1');
-            const q2 = document.getElementById('fin-quote-2');
-            const q3 = document.getElementById('fin-quote-3');
-            const q4 = document.getElementById('fin-quote-4');
+            const hintChip = document.getElementById('secret-epilogue-hint-chip');
+
+            const quotes = [];
+            for (let i = 1; i <= 10; i++) {
+                quotes.push(document.getElementById(`fin-quote-${i}`));
+            }
 
             finaleCinematicTimers.forEach(t => clearTimeout(t));
             finaleCinematicTimers = [];
+            moonClickHandled = false;
 
             if (cinLayer) cinLayer.style.opacity = '1';
-            if (contentBox) contentBox.classList.remove('cinematic-done');
+            if (contentBox) {
+                contentBox.classList.remove('cinematic-done');
+                contentBox.style.opacity = '0';
+                contentBox.style.pointerEvents = 'none';
+            }
             if (moonWrap) {
                 moonWrap.style.transition = 'opacity 1.2s ease';
                 moonWrap.style.opacity = '1';
@@ -5701,7 +5992,7 @@
                 cloudsWrap.style.transition = 'opacity 1.2s ease';
                 cloudsWrap.style.opacity = '1';
             }
-            [q1, q2, q3, q4].forEach(q => { if (q) q.classList.remove('active', 'exit'); });
+            quotes.forEach(q => { if (q) q.classList.remove('active', 'exit'); });
 
             clearInterval(fireworksBatchInterval);
             fireworks = [];
@@ -5709,48 +6000,40 @@
 
             startJayshreeConstellation();
 
-            // Quote 1
-            finaleCinematicTimers.push(setTimeout(() => {
-                if (q1) q1.classList.add('active');
-            }, 4000));
+            // Continuous 10-Quote Sequence Timeline
+            const timings = [
+                { in: 3600, out: 5800 },   // 1. "Wait..."
+                { in: 6400, out: 8600 },   // 2. "There is one more thing."
+                { in: 9200, out: 11200 },  // 3. "This application has a beginning."
+                { in: 11800, out: 13800 }, // 4. "It has a middle."
+                { in: 14400, out: 16400 }, // 5. "But maybe…"
+                { in: 17000, out: 19400 }, // 6. "…it doesn't have to have an ending."
+                { in: 20000, out: 22400 }, // 7. "Journey completed ✨"
+                { in: 23000, out: 25400 }, // 8. "Thank you for staying until the last page."
+                { in: 26000, out: 28400 }, // 9. "7 chapters. 1 story..."
+                { in: 29000, out: 31800 }  // 10. "And somehow, it still feels..."
+            ];
 
-            finaleCinematicTimers.push(setTimeout(() => {
-                if (q1) { q1.classList.remove('active'); q1.classList.add('exit'); }
-            }, 6400));
+            timings.forEach((t, index) => {
+                const q = quotes[index];
+                if (!q) return;
 
-            // Quote 2
-            finaleCinematicTimers.push(setTimeout(() => {
-                if (q2) q2.classList.add('active');
-            }, 7000));
+                finaleCinematicTimers.push(setTimeout(() => {
+                    q.classList.add('active');
+                }, t.in));
 
-            finaleCinematicTimers.push(setTimeout(() => {
-                if (q2) { q2.classList.remove('active'); q2.classList.add('exit'); }
-            }, 9400));
+                finaleCinematicTimers.push(setTimeout(() => {
+                    q.classList.remove('active');
+                    q.classList.add('exit');
+                }, t.out));
+            });
 
-            // Quote 3
-            finaleCinematicTimers.push(setTimeout(() => {
-                if (q3) q3.classList.add('active');
-            }, 10000));
-
-            finaleCinematicTimers.push(setTimeout(() => {
-                if (q3) { q3.classList.remove('active'); q3.classList.add('exit'); }
-            }, 12400));
-
-            // Quote 4
-            finaleCinematicTimers.push(setTimeout(() => {
-                if (q4) q4.classList.add('active');
-            }, 13000));
-
-            finaleCinematicTimers.push(setTimeout(() => {
-                if (q4) { q4.classList.remove('active'); q4.classList.add('exit'); }
-            }, 15600));
-
-            // Final Climax - Celebration Div appears & Fireworks launch AFTER
+            // Final Climax - Celebration Div appears & Fireworks launch
             finaleCinematicTimers.push(setTimeout(() => {
                 finishGrandFinaleCinematic();
-            }, 16400));
+            }, 32600));
 
-            // Tap anywhere during cinematic to skip to climax immediately
+            // Tap anywhere during cinematic to skip to climax
             if (cinLayer) {
                 cinLayer.onclick = () => {
                     finishGrandFinaleCinematic();
@@ -5761,26 +6044,47 @@
         function finishGrandFinaleCinematic() {
             finaleCinematicTimers.forEach(t => clearTimeout(t));
             finaleCinematicTimers = [];
+            clearTimeout(finaleMsgTimeout);
+            clearTimeout(whatsappBtnTimeout);
 
             const cinLayer = document.getElementById('finale-cinematic-layer');
             const contentBox = document.getElementById('finale-content-box');
             const moonWrap = document.getElementById('finale-moon-wrapper');
             const cloudsWrap = document.getElementById('finale-clouds-layer');
+            const heartfeltMsg = document.getElementById('finale-heartfelt-msg');
+            const whatsappBtn = document.getElementById('whatsapp-btn');
 
             if (cinLayer) cinLayer.style.opacity = '0';
             if (moonWrap) moonWrap.style.opacity = '1';
             if (cloudsWrap) cloudsWrap.style.opacity = '1';
 
+            if (heartfeltMsg) heartfeltMsg.classList.remove('reveal');
+            if (whatsappBtn) whatsappBtn.classList.remove('reveal');
+
             setTimeout(() => {
-                if (contentBox) contentBox.classList.add('cinematic-done');
+                if (contentBox) {
+                    contentBox.style.opacity = '1';
+                    contentBox.style.pointerEvents = 'auto';
+                    contentBox.classList.add('cinematic-done');
+                }
                 if (typeof createStardustBurst === 'function') {
                     createStardustBurst(window.innerWidth / 2, window.innerHeight / 2, 35);
                 }
 
-                // THEN FIREWORKS START NOW (earned finale timing!)
+                // Fireworks launch
                 launchMinimalFireworksBatch();
                 clearInterval(fireworksBatchInterval);
                 fireworksBatchInterval = setInterval(launchMinimalFireworksBatch, 1800);
+
+                // Reveal "Thank You For Existing" card after 3 seconds
+                finaleMsgTimeout = setTimeout(() => {
+                    if (heartfeltMsg) heartfeltMsg.classList.add('reveal');
+                }, 3000);
+
+                // Reveal WhatsApp button 1 second after (4 seconds total)
+                whatsappBtnTimeout = setTimeout(() => {
+                    if (whatsappBtn) whatsappBtn.classList.add('reveal');
+                }, 4000);
             }, 400);
         }
 
@@ -5789,11 +6093,25 @@
 
             initFinaleStars();
 
-            finaleHeartfeltMsg.classList.remove('reveal');
             clearTimeout(finaleMsgTimeout);
+            clearTimeout(whatsappBtnTimeout);
             clearInterval(fireworksBatchInterval);
+            finaleCinematicTimers.forEach(t => clearTimeout(t));
+            finaleCinematicTimers = [];
             fireworks = [];
             fwParticles = [];
+
+            const heartfeltMsg = document.getElementById('finale-heartfelt-msg');
+            const whatsappBtn = document.getElementById('whatsapp-btn');
+            if (heartfeltMsg) heartfeltMsg.classList.remove('reveal');
+            if (whatsappBtn) whatsappBtn.classList.remove('reveal');
+
+            const contentBox = document.getElementById('finale-content-box');
+            if (contentBox) {
+                contentBox.classList.remove('cinematic-done');
+                contentBox.style.opacity = '0';
+                contentBox.style.pointerEvents = 'none';
+            }
 
             document.body.classList.add('finale-active');
             finaleOverlay.classList.remove('closing');
@@ -5807,10 +6125,6 @@
             countdownInterval = setInterval(updateCountdown, 1000);
 
             runGrandFinaleCinematicSequence();
-
-            finaleMsgTimeout = setTimeout(() => {
-                finaleHeartfeltMsg.classList.add('reveal');
-            }, 19000);
         }
 
         if (finaleBtn) {
@@ -5827,6 +6141,22 @@
                     if (fwAnimId) cancelAnimationFrame(fwAnimId);
                     clearInterval(countdownInterval);
                     clearInterval(fireworksBatchInterval);
+                    finaleCinematicTimers.forEach(t => clearTimeout(t));
+                    finaleCinematicTimers = [];
+                    clearTimeout(finaleMsgTimeout);
+                    clearTimeout(whatsappBtnTimeout);
+
+                    const heartfeltMsg = document.getElementById('finale-heartfelt-msg');
+                    const whatsappBtn = document.getElementById('whatsapp-btn');
+                    if (heartfeltMsg) heartfeltMsg.classList.remove('reveal');
+                    if (whatsappBtn) whatsappBtn.classList.remove('reveal');
+
+                    const contentBox = document.getElementById('finale-content-box');
+                    if (contentBox) {
+                        contentBox.classList.remove('cinematic-done');
+                        contentBox.style.opacity = '0';
+                        contentBox.style.pointerEvents = 'none';
+                    }
                 }, 350);
             });
         }
@@ -5855,15 +6185,18 @@
             }
         };
 
-        if (secretMoonBtn && secretModalOverlay) {
-            secretMoonBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
+        const openSecretModalFromAnywhere = (e) => {
+            if (e) e.stopPropagation();
+            if (secretModalOverlay) {
                 secretModalOverlay.classList.add('active');
                 if (typeof createStardustBurst === 'function') {
-                    const rect = secretMoonBtn.getBoundingClientRect();
-                    createStardustBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 20);
+                    createStardustBurst(window.innerWidth / 2, window.innerHeight / 2, 24);
                 }
-            });
+            }
+        };
+
+        if (secretMoonBtn) {
+            secretMoonBtn.addEventListener('click', openSecretModalFromAnywhere);
         }
 
         if (secretModalClose) {
@@ -5879,6 +6212,8 @@
                 }
             });
         }
+
+
 
         /* WhatsApp Redirect Handler */
         const whatsappBtn = document.getElementById('whatsapp-btn');

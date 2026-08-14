@@ -1193,6 +1193,8 @@
             height: 100%;
             z-index: 1;
             pointer-events: none;
+            will-change: transform, opacity;
+            transform: translateZ(0);
         }
 
         .finale-center-rose-box {
@@ -3050,6 +3052,13 @@
             overflow: hidden;
         }
 
+        @media (max-width: 768px) {
+            .grand-finale-overlay {
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+            }
+        }
+
         .grand-finale-overlay.active {
             opacity: 1;
             visibility: visible;
@@ -3075,6 +3084,8 @@
             inset: 0;
             pointer-events: none;
             z-index: 4;
+            will-change: transform, opacity;
+            transform: translateZ(0);
         }
 
         .finale-close-btn {
@@ -4387,6 +4398,7 @@
         const ctx = canvas.getContext('2d');
         let width, height, particles = [];
         let touchParticles = [];
+        let isAmbientPaused = false;
 
         function resizeCanvas() {
             width = canvas.width = window.innerWidth;
@@ -4500,15 +4512,17 @@
         });
 
         function animateParticles() {
-            ctx.clearRect(0, 0, width, height);
-            particles.forEach(p => { p.update(); p.draw(); });
+            if (!isAmbientPaused) {
+                ctx.clearRect(0, 0, width, height);
+                particles.forEach(p => { p.update(); p.draw(); });
 
-            for (let i = touchParticles.length - 1; i >= 0; i--) {
-                const tp = touchParticles[i];
-                tp.update();
-                tp.draw();
-                if (tp.life <= 0) {
-                    touchParticles.splice(i, 1);
+                for (let i = touchParticles.length - 1; i >= 0; i--) {
+                    const tp = touchParticles[i];
+                    tp.update();
+                    tp.draw();
+                    if (tp.life <= 0) {
+                        touchParticles.splice(i, 1);
+                    }
                 }
             }
             requestAnimationFrame(animateParticles);
@@ -4838,27 +4852,30 @@
         const preludeEnterBtn = document.getElementById('prelude-enter-btn');
         const preludeWelcome = document.getElementById('prelude-welcome');
 
-        /* Helper to draw tiny 4-point sparkling star icons on canvas */
-        function drawTinyStarIcon(ctx, cx, cy, radius, color) {
+        /* Helper to draw tiny 4-point sparkling star icons on canvas with high-performance offset drawing */
+        function drawTinyStarIcon(ctx, cx, cy, radius, color, skipShadow = false) {
             if (radius <= 0) return;
             const innerRadius = radius * 0.35;
-            ctx.save();
             ctx.beginPath();
-            ctx.translate(cx, cy);
-            ctx.moveTo(0, -radius);
-            ctx.lineTo(innerRadius, -innerRadius);
-            ctx.lineTo(radius, 0);
-            ctx.lineTo(innerRadius, innerRadius);
-            ctx.lineTo(0, radius);
-            ctx.lineTo(-innerRadius, innerRadius);
-            ctx.lineTo(-radius, 0);
-            ctx.lineTo(-innerRadius, -innerRadius);
+            ctx.moveTo(cx, cy - radius);
+            ctx.lineTo(cx + innerRadius, cy - innerRadius);
+            ctx.lineTo(cx + radius, cy);
+            ctx.lineTo(cx + innerRadius, cy + innerRadius);
+            ctx.lineTo(cx, cy + radius);
+            ctx.lineTo(cx - innerRadius, cy + innerRadius);
+            ctx.lineTo(cx - radius, cy);
+            ctx.lineTo(cx - innerRadius, cy - innerRadius);
             ctx.closePath();
             ctx.fillStyle = color;
-            ctx.shadowColor = 'rgba(255, 180, 210, 0.6)';
-            ctx.shadowBlur = Math.max(2, radius * 1.4);
+            const isMobile = window.innerWidth < 768;
+            if (!skipShadow && !isMobile) {
+                ctx.shadowColor = 'rgba(255, 180, 210, 0.6)';
+                ctx.shadowBlur = Math.max(2, radius * 1.4);
+            }
             ctx.fill();
-            ctx.restore();
+            if (!skipShadow && !isMobile) {
+                ctx.shadowBlur = 0;
+            }
         }
 
         /* Precision Star Constellation Generator for Name "JAYSHREE" */
@@ -5050,15 +5067,19 @@
                     const starColor = s.targetX !== null && constellationProgress > 0
                         ? `rgba(255, 245, 252, ${0.45 + easeRatio * 0.45})`
                         : `rgba(255, 220, 235, ${currentAlpha * 0.65})`;
-                    drawTinyStarIcon(ctx, drawX, drawY, starSize, starColor);
+                    const isMobile = window.innerWidth < 768;
+                    drawTinyStarIcon(ctx, drawX, drawY, starSize, starColor, isMobile);
                 });
 
                 if (constellationProgress > 0.05) {
                     const lineAlpha = Math.min(1, (constellationProgress - 0.05) * 1.15) * 0.28;
                     ctx.strokeStyle = `rgba(255, 215, 230, ${lineAlpha})`;
                     ctx.lineWidth = 0.8;
-                    ctx.shadowBlur = 4;
-                    ctx.shadowColor = 'rgba(255, 133, 161, 0.4)';
+                    const isMobile = window.innerWidth < 768;
+                    if (!isMobile) {
+                        ctx.shadowBlur = 4;
+                        ctx.shadowColor = 'rgba(255, 133, 161, 0.4)';
+                    }
 
                     strokePairs.forEach(pair => {
                         const p1 = drawnPoints[pair[0]];
@@ -5070,7 +5091,9 @@
                             ctx.stroke();
                         }
                     });
-                    ctx.shadowBlur = 0;
+                    if (!isMobile) {
+                        ctx.shadowBlur = 0;
+                    }
                 }
 
                 preludeAnimId = requestAnimationFrame(animatePreludeCanvas);
@@ -5682,9 +5705,18 @@
             }
         }
 
+        function hslToRgbStr(h, s, l) {
+            s /= 100; l /= 100;
+            const k = n => (n + h / 30) % 12;
+            const a = s * Math.min(l, 1 - l);
+            const f = n => l - a * Math.max(-1, Math.min(k(n) - 3, 9 - k(n), 1));
+            return `${Math.round(255 * f(0))}, ${Math.round(255 * f(8))}, ${Math.round(255 * f(4))}`;
+        }
+
         function launchMinimalFireworksBatch() {
             if (!finaleOverlay || !finaleOverlay.classList.contains('active')) return;
-            const count = 2 + Math.floor(Math.random() * 2);
+            const isMobile = window.innerWidth < 768;
+            const count = isMobile ? 1 : (2 + Math.floor(Math.random() * 2));
             for (let k = 0; k < count; k++) {
                 setTimeout(() => {
                     if (!finaleOverlay || !finaleOverlay.classList.contains('active')) return;
@@ -5742,10 +5774,15 @@
                 fwCtx.lineTo(this.x, this.y);
                 fwCtx.strokeStyle = `hsl(${this.hue}, 100%, 75%)`;
                 fwCtx.lineWidth = 2.2;
-                fwCtx.shadowBlur = 8;
-                fwCtx.shadowColor = 'rgba(255, 133, 161, 0.85)';
+                const isMobile = window.innerWidth < 768;
+                if (!isMobile) {
+                    fwCtx.shadowBlur = 8;
+                    fwCtx.shadowColor = 'rgba(255, 133, 161, 0.85)';
+                }
                 fwCtx.stroke();
-                fwCtx.shadowBlur = 0;
+                if (!isMobile) {
+                    fwCtx.shadowBlur = 0;
+                }
             }
         }
 
@@ -5761,6 +5798,7 @@
                 this.gravity = 0.07;
                 this.hue = hue || (Math.random() * 60 + 320);
                 this.brightness = Math.random() * 35 + 65;
+                this.rgb = hslToRgbStr(this.hue, 100, this.brightness);
                 this.alpha = 1;
                 this.decay = Math.random() * 0.014 + 0.009;
                 this.alive = true;
@@ -5786,21 +5824,22 @@
                 fwCtx.beginPath();
                 fwCtx.moveTo(this.px, this.py);
                 fwCtx.lineTo(this.x, this.y);
-                fwCtx.strokeStyle = `hsla(${this.hue}, 100%, ${this.brightness}%, ${this.alpha})`;
+                fwCtx.strokeStyle = `rgba(${this.rgb}, ${this.alpha})`;
                 fwCtx.lineWidth = this.size;
                 fwCtx.stroke();
             }
         }
 
         function createExplosion(x, y) {
-            const particleCount = 65;
+            const isMobile = window.innerWidth < 768;
+            const particleCount = isMobile ? 26 : 65;
             const baseHue = Math.random() * 80 + 310;
             for (let i = 0; i < particleCount; i++) {
                 const t = (i / particleCount) * Math.PI * 2;
                 const heartX = 16 * Math.pow(Math.sin(t), 3);
                 const heartY = -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
 
-                const speedScale = 0.26 + Math.random() * 0.06;
+                const speedScale = (isMobile ? 0.20 : 0.26) + Math.random() * 0.06;
                 const vx = heartX * speedScale;
                 const vy = heartY * speedScale;
 
@@ -5809,16 +5848,32 @@
             }
         }
 
-        function animateFireworks() {
+        let lastFwFrameTime = 0;
+
+        function animateFireworks(timestamp) {
             if (!finaleOverlay || !finaleOverlay.classList.contains('active')) {
                 fwAnimId = null;
                 return;
             }
 
-            fwCtx.globalCompositeOperation = 'destination-out';
-            fwCtx.fillStyle = 'rgba(0, 0, 0, 0.18)';
-            fwCtx.fillRect(0, 0, fwWidth, fwHeight);
-            fwCtx.globalCompositeOperation = 'lighter';
+            const isMobile = window.innerWidth < 768;
+
+            if (isMobile && timestamp && lastFwFrameTime && (timestamp - lastFwFrameTime < 16)) {
+                fwAnimId = requestAnimationFrame(animateFireworks);
+                return;
+            }
+            if (timestamp) lastFwFrameTime = timestamp;
+
+            if (isMobile) {
+                fwCtx.globalCompositeOperation = 'source-over';
+                fwCtx.fillStyle = 'rgba(1, 8, 18, 0.22)';
+                fwCtx.fillRect(0, 0, fwWidth, fwHeight);
+            } else {
+                fwCtx.globalCompositeOperation = 'destination-out';
+                fwCtx.fillStyle = 'rgba(0, 0, 0, 0.18)';
+                fwCtx.fillRect(0, 0, fwWidth, fwHeight);
+                fwCtx.globalCompositeOperation = 'lighter';
+            }
 
             for (let i = 0; i < fireworks.length; i++) {
                 fireworks[i].update();
@@ -5927,15 +5982,19 @@
 
                     const starSize = Math.max(1.2, s.size * tw * (0.55 + easeRatio * 0.35));
                     const starColor = `rgba(255, 245, 252, ${s.targetAlpha * tw * fadeRatio * 0.85})`;
-                    drawTinyStarIcon(fCtx, curX, curY, starSize, starColor);
+                    const isMobile = window.innerWidth < 768;
+                    drawTinyStarIcon(fCtx, curX, curY, starSize, starColor, isMobile);
                 });
 
                 if (formRatio > 0.05) {
                     const lineAlpha = Math.min(1, (formRatio - 0.05) * 1.1) * 0.25 * fadeRatio;
                     fCtx.strokeStyle = `rgba(255, 215, 230, ${lineAlpha})`;
                     fCtx.lineWidth = 0.8;
-                    fCtx.shadowBlur = 4;
-                    fCtx.shadowColor = 'rgba(255, 133, 161, 0.4)';
+                    const isMobile = window.innerWidth < 768;
+                    if (!isMobile) {
+                        fCtx.shadowBlur = 4;
+                        fCtx.shadowColor = 'rgba(255, 133, 161, 0.4)';
+                    }
 
                     strokePairs.forEach(pair => {
                         const p1 = currentPoints[pair[0]];
@@ -5947,7 +6006,9 @@
                             fCtx.stroke();
                         }
                     });
-                    fCtx.shadowBlur = 0;
+                    if (!isMobile) {
+                        fCtx.shadowBlur = 0;
+                    }
                 }
 
                 if (elapsed < 4.8) {
@@ -6046,6 +6107,10 @@
             finaleCinematicTimers = [];
             clearTimeout(finaleMsgTimeout);
             clearTimeout(whatsappBtnTimeout);
+            if (finaleStarAnimId) {
+                cancelAnimationFrame(finaleStarAnimId);
+                finaleStarAnimId = null;
+            }
 
             const cinLayer = document.getElementById('finale-cinematic-layer');
             const contentBox = document.getElementById('finale-content-box');
@@ -6091,6 +6156,7 @@
         function triggerGrandFinale() {
             if (!finaleOverlay) return;
 
+            isAmbientPaused = true;
             initFinaleStars();
 
             clearTimeout(finaleMsgTimeout);
@@ -6137,6 +6203,7 @@
                 document.body.classList.remove('finale-active');
 
                 setTimeout(() => {
+                    isAmbientPaused = false;
                     finaleOverlay.classList.remove('active', 'closing');
                     if (fwAnimId) cancelAnimationFrame(fwAnimId);
                     clearInterval(countdownInterval);

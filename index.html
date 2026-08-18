@@ -1176,14 +1176,15 @@
         .finale-cinematic-layer {
             position: absolute;
             inset: 0;
-            z-index: 2;
-            pointer-events: none;
+            z-index: 3;
+            pointer-events: auto;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             opacity: 1;
             transition: opacity 0.8s ease;
+            cursor: pointer;
         }
 
         #finale-stars-constellation-canvas {
@@ -1463,7 +1464,7 @@
         /* Finale Content Box Initial State (Hidden until Cinematic completes) */
         .finale-content-box {
             position: relative;
-            z-index: 4;
+            z-index: 6;
             opacity: 0;
             transform: translateY(30px) scale(0.96);
             transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
@@ -3321,6 +3322,10 @@
             align-items: center;
             justify-content: center;
             margin: 0 auto;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            user-select: none;
         }
 
         @keyframes finale-btn-pulse {
@@ -3399,7 +3404,7 @@
         }
 
         /* Mobile Optimization Rules */
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
             .finale-moon-wrapper {
                 top: 18px;
                 right: 18px;
@@ -3412,13 +3417,16 @@
                 -webkit-overflow-scrolling: touch;
                 align-items: flex-start;
                 padding: 45px 12px 30px 12px;
+                display: flex;
             }
 
             .finale-content-box {
-                padding: 10px 5px;
+                padding: 40px 5px;
                 width: 100%;
                 max-width: 100%;
-                margin: auto 0;
+                margin: 0 auto;
+                position: relative;
+                z-index: 6;
             }
 
             .finale-badge {
@@ -5488,7 +5496,7 @@
         let activeSlide = null;
 
         window.addEventListener('touchstart', (e) => {
-            if (!welcomeScreen.classList.contains('hidden') || isTransitioning) return;
+            if (!welcomeScreen.classList.contains('hidden') || isTransitioning || (finaleOverlay && finaleOverlay.classList.contains('active'))) return;
             if (!e.touches || e.touches.length === 0) return;
 
             touchStartX = e.touches[0].clientX;
@@ -5501,7 +5509,7 @@
         }, { passive: true });
 
         window.addEventListener('touchmove', (e) => {
-            if (!activeSlide || isTransitioning || isScrolling) return;
+            if (!activeSlide || isTransitioning || isScrolling || (finaleOverlay && finaleOverlay.classList.contains('active'))) return;
             if (!e.touches || e.touches.length === 0) return;
 
             const deltaX = e.touches[0].clientX - touchStartX;
@@ -5539,6 +5547,7 @@
         }, { passive: true });
 
         window.addEventListener('touchend', () => {
+            if (finaleOverlay && finaleOverlay.classList.contains('active')) return;
             if (!activeSlide) return;
 
             if (isSwiping && !isTransitioning && !isScrolling) {
@@ -5715,16 +5724,15 @@
 
         function launchMinimalFireworksBatch() {
             if (!finaleOverlay || !finaleOverlay.classList.contains('active')) return;
-            const isMobile = window.innerWidth < 768;
-            const count = isMobile ? 1 : (2 + Math.floor(Math.random() * 2));
+            const count = 3 + Math.floor(Math.random() * 2); // 3 to 4 crackers per burst
             for (let k = 0; k < count; k++) {
                 setTimeout(() => {
                     if (!finaleOverlay || !finaleOverlay.classList.contains('active')) return;
-                    const startX = fwWidth * 0.2 + Math.random() * (fwWidth * 0.6);
-                    const targetX = fwWidth * 0.15 + Math.random() * (fwWidth * 0.7);
-                    const targetY = fwHeight * 0.1 + Math.random() * (fwHeight * 0.35);
+                    const startX = fwWidth * 0.15 + Math.random() * (fwWidth * 0.7);
+                    const targetX = fwWidth * 0.12 + Math.random() * (fwWidth * 0.76);
+                    const targetY = fwHeight * 0.08 + Math.random() * (fwHeight * 0.35);
                     fireworks.push(new Firework(startX, fwHeight, targetX, targetY));
-                }, k * 180);
+                }, k * 160);
             }
         }
 
@@ -5864,16 +5872,10 @@
             }
             if (timestamp) lastFwFrameTime = timestamp;
 
-            if (isMobile) {
-                fwCtx.globalCompositeOperation = 'source-over';
-                fwCtx.fillStyle = 'rgba(1, 8, 18, 0.22)';
-                fwCtx.fillRect(0, 0, fwWidth, fwHeight);
-            } else {
-                fwCtx.globalCompositeOperation = 'destination-out';
-                fwCtx.fillStyle = 'rgba(0, 0, 0, 0.18)';
-                fwCtx.fillRect(0, 0, fwWidth, fwHeight);
-                fwCtx.globalCompositeOperation = 'lighter';
-            }
+            fwCtx.globalCompositeOperation = 'destination-out';
+            fwCtx.fillStyle = 'rgba(0, 0, 0, 0.18)';
+            fwCtx.fillRect(0, 0, fwWidth, fwHeight);
+            fwCtx.globalCompositeOperation = 'lighter';
 
             for (let i = 0; i < fireworks.length; i++) {
                 fireworks[i].update();
@@ -6039,7 +6041,10 @@
             finaleCinematicTimers = [];
             moonClickHandled = false;
 
-            if (cinLayer) cinLayer.style.opacity = '1';
+            if (cinLayer) {
+                cinLayer.style.opacity = '1';
+                cinLayer.style.pointerEvents = 'auto';
+            }
             if (contentBox) {
                 contentBox.classList.remove('cinematic-done');
                 contentBox.style.opacity = '0';
@@ -6099,6 +6104,10 @@
                 cinLayer.onclick = () => {
                     finishGrandFinaleCinematic();
                 };
+                cinLayer.ontouchend = (e) => {
+                    e.preventDefault();
+                    finishGrandFinaleCinematic();
+                };
             }
         }
 
@@ -6119,7 +6128,10 @@
             const heartfeltMsg = document.getElementById('finale-heartfelt-msg');
             const whatsappBtn = document.getElementById('whatsapp-btn');
 
-            if (cinLayer) cinLayer.style.opacity = '0';
+            if (cinLayer) {
+                cinLayer.style.opacity = '0';
+                cinLayer.style.pointerEvents = 'none';
+            }
             if (moonWrap) moonWrap.style.opacity = '1';
             if (cloudsWrap) cloudsWrap.style.opacity = '1';
 
@@ -6136,10 +6148,10 @@
                     createStardustBurst(window.innerWidth / 2, window.innerHeight / 2, 35);
                 }
 
-                // Fireworks launch
+                // Fireworks launch (burst of 3-4 crackers, repeated every 3 seconds)
                 launchMinimalFireworksBatch();
                 clearInterval(fireworksBatchInterval);
-                fireworksBatchInterval = setInterval(launchMinimalFireworksBatch, 1800);
+                fireworksBatchInterval = setInterval(launchMinimalFireworksBatch, 3000);
 
                 // Reveal "Thank You For Existing" card after 3 seconds
                 finaleMsgTimeout = setTimeout(() => {
